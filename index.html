@@ -2,177 +2,176 @@
 <html lang="en" id="top">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- TODO[站点标题/SEO]：浏览器标签页显示的标题；也会影响搜索引擎 -->
+  <!-- 允许缩放 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
   <title>Huan Song | Atmospheric Chemistry</title>
-
-  <!-- TODO[SEO 描述]：搜索结果摘要/社交分享描述 -->
   <meta name="description" content="Huan Song — atmospheric multiphase chemistry, HOx radicals, aerosol aging." />
 
-  <!-- TODO[字体]：想换字体，改 family；不用额外字体就删掉整行 -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
+  <!-- 美式报刊/期刊风字体：正文 Source Serif 4；标题 Bodoni Moda；UI IBM Plex Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..700&family=Bodoni+Moda:opsz,wght@6..96,500..800&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
 
- <style>
-  /* ========= 主题变量（配色不变，新增一组排版尺寸变量） ========= */
-  :root{
-    /* 颜色（与你当前一致） */
-    --bg:      #EFF6FF;
-    --text:    #1F2937;
-    --muted:   #6B7280;
-    --border:  #E5E7EB;
-    --brand:   #3B82F6;
-    --accent:  #06B6D4;
-    --side-bg:     #0B1F3A;
-    --side-border: #0B1F3A;
-    --side-text:   #E8EEF9;
-    --side-muted:  #A9B7D3;
-    --side-hover:  rgba(255,255,255,.08);
-    --side-active: rgba(255,255,255,.16);
+  <style>
+    /* ========= 主题变量（配色 + 自适应排版） ========= */
+    :root{
+      /* 颜色 */
+      --bg:      #EFF6FF;
+      --text:    #1F2937;
+      --muted:   #6B7280;
+      --border:  #E5E7EB;
+      --brand:   #3B82F6;
+      --accent:  #06B6D4;
 
-    --radius:  14px;
-    --shadow:  0 6px 18px rgba(0,0,0,.06);
+      --side-bg:     #0B1F3A;
+      --side-border: #0B1F3A;
+      --side-text:   #E8EEF9;
+      --side-muted:  #A9B7D3;
+      --side-hover:  rgba(255,255,255,.08);
+      --side-active: rgba(255,255,255,.16);
 
-    /* 顶部横幅（高度也做成自适应） */
-    --hero-height: clamp(36vh, 28vh + 10vw, 60vh);
-    --hero-overlay: rgba(0,0,0,.25);
+      --radius:  14px;
+      --shadow:  0 6px 18px rgba(0,0,0,.06);
 
-    /* ======== 新增：排版尺寸（全站放大 + 自适应） ======== */
-    /* 基础正文字号：小屏≥18px，大屏缓慢增至20–21px */
-    --font-size-base: clamp(18px, 0.9vw + 14px, 21px);
-    --line-height-base: 1.8;
+      /* 自适应尺寸（clamp） */
+      --hero-height: clamp(36vh, 28vh + 10vw, 60vh);
+      --hero-overlay: rgba(0,0,0,.25);
 
-    /* 各级标题（随屏宽放大） */
-    --font-h1: clamp(36px, 3.4vw + 12px, 58px); /* 顶部横幅主标题 */
-    --font-h2: clamp(22px, 1.2vw + 14px, 30px); /* 区块标题 */
-    --font-h3: clamp(18px, 1.0vw + 12px, 24px); /* 研究内小标题 */
+      --font-size-base: clamp(18px, 0.9vw + 14px, 21px);
+      --line-height-base: 1.85;
 
-    /* 组件尺寸 */
-    --chip-size: clamp(12px, 0.25vw + 11px, 14px);
-    --nav-pad-v: clamp(8px, 0.5vw + 6px, 12px);
-    --nav-pad-h: clamp(10px, 0.6vw + 8px, 14px);
+      --font-h1: clamp(36px, 3.4vw + 12px, 58px);
+      --font-h2: clamp(22px, 1.2vw + 14px, 30px);
+      --font-h3: clamp(18px, 1.0vw + 12px, 24px);
 
-    /* 布局宽度 */
-    --sidenav-width: clamp(220px, 22vw, 300px);
-    --content-max: min(100%, 1100px);
-    --content-pad: clamp(16px, 1.8vw, 28px);
-  }
+      --chip-size: clamp(12px, 0.25vw + 11px, 14px);
+      --nav-pad-v: clamp(8px, 0.5vw + 6px, 12px);
+      --nav-pad-h: clamp(10px, 0.6vw + 8px, 14px);
 
-  /* ========= 基础排版 ========= */
-  html{scroll-behavior:smooth}
-  body{
-    margin:0; background:var(--bg); color:var(--text);
-    font: var(--font-size-base)/var(--line-height-base) "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
-  }
-  a{color:var(--brand); text-decoration:none}
-  a:hover{text-decoration:underline}
-  img{max-width:100%; height:auto; display:block}
-  .muted{color:var(--muted)}
-  .wrap{display:flex; min-height:100vh}
+      --sidenav-width: clamp(220px, 22vw, 300px);
+      --content-max: min(100%, 1100px);
+      --content-pad: clamp(16px, 1.8vw, 28px);
+    }
 
-  /* ========= 左侧导航（深蓝纯色 + 浅色文字） ========= */
-  .sidenav{
-    width:var(--sidenav-width); flex:0 0 var(--sidenav-width);
-    position:sticky; top:0; height:100vh;
-    padding:22px; box-sizing:border-box;
-    border-right:1px solid var(--side-border);
-    background: var(--side-bg);
-  }
-  .brand{display:flex; gap:12px; align-items:center; margin-bottom:12px}
-  .dot{width:12px;height:12px;border-radius:50%; background:#22D3EE; box-shadow:0 0 14px rgba(34,211,238,.6)}
-  .brand h1{margin:0; font-size:clamp(20px, 1.2vw + 14px, 26px); line-height:1.2; color:#fff}
-  .brand p{margin:6px 0 0; font-size:clamp(12px, 0.5vw + 10px, 14px); color:var(--side-muted)}
+    /* ========= 基础排版（期刊风） ========= */
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font: var(--font-size-base)/var(--line-height-base) "Source Serif 4", Georgia, "Times New Roman", Times, serif;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      font-kerning: normal; font-feature-settings: "liga" 1, "kern" 1, "onum" 1;
+    }
+    h1,h2,h3{
+      font-family: "Bodoni Moda", "Libre Baskerville", "Times New Roman", Times, serif;
+      font-weight:600; letter-spacing:.2px; line-height:1.25;
+    }
+    h1{ font-size:var(--font-h1); }
+    h2{ font-size:var(--font-h2); }
+    h3{ font-size:var(--font-h3); }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%; height:auto; display:block}
+    .muted{color:var(--muted)}
+    .wrap{display:flex; min-height:100vh}
 
-  nav ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-  .sidenav nav a{
-    display:block;
-    padding: var(--nav-pad-v) var(--nav-pad-h);
-    border-radius:10px;
-    color: var(--side-text); border:1px solid transparent; background: transparent;
-    transition: background .15s ease;
-    font-size: clamp(14px, 0.4vw + 12px, 16px);
-  }
-  .sidenav nav a:hover{  background: var(--side-hover);  border-color: transparent; }
-  .sidenav nav a.active{ background: var(--side-active); border-color: transparent; box-shadow: none; }
+    /* ========= 左侧导航（深蓝纯色 + 浅色文字，UI 字体） ========= */
+    .sidenav{
+      width:var(--sidenav-width); flex:0 0 var(--sidenav-width);
+      position:sticky; top:0; height:100vh;
+      padding:22px; box-sizing:border-box;
+      border-right:1px solid var(--side-border);
+      background: var(--side-bg);
+      font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .brand{display:flex; gap:12px; align-items:center; margin-bottom:12px}
+    .dot{width:12px;height:12px;border-radius:50%; background:#22D3EE; box-shadow:0 0 14px rgba(34,211,238,.6)}
+    .brand h1{margin:0; font-size:clamp(20px, 1.2vw + 14px, 26px); line-height:1.2; color:#fff; font-family:"IBM Plex Sans",system-ui,sans-serif}
+    .brand p{margin:6px 0 0; font-size:clamp(12px, 0.5vw + 10px, 14px); color:var(--side-muted)}
 
-  .side-foot{
-    position:absolute; left:22px; right:22px; bottom:18px;
-    font-size:clamp(11px, 0.3vw + 10px, 13px); color:var(--side-muted)
-  }
+    nav ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+    .sidenav nav a{
+      display:block; padding: var(--nav-pad-v) var(--nav-pad-h); border-radius:10px;
+      color: var(--side-text); border:1px solid transparent; background: transparent;
+      transition: background .15s ease;
+      font-size: clamp(14px, 0.4vw + 12px, 16px);
+    }
+    .sidenav nav a:hover{  background: var(--side-hover);  border-color: transparent; }
+    .sidenav nav a.active{ background: var(--side-active); border-color: transparent; box-shadow: none; }
 
-  /* ========= 顶部横幅 ========= */
-  .hero{
-    position:relative; height:var(--hero-height); width:100%; overflow:hidden;
-    border-bottom:1px solid var(--border);
-  }
-  .hero::before{
-    content:""; position:absolute; inset:0;
-    background:
-      linear-gradient(180deg, var(--hero-overlay), var(--hero-overlay)),
-      url('/images/hero.jpg') center/cover no-repeat;
-    filter:saturate(1.05) brightness(0.95);
-    z-index:0;
-  }
-  .hero-inner{
-    position:relative; z-index:1; height:100%;
-    display:flex; align-items:end; justify-content:center; text-align:center;
-    padding:18px; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.3)
-  }
-  .hero h1{margin:0; font-size:var(--font-h1)}
-  .hero p{margin:.35em 0 0; font-size:clamp(14px, 0.7vw + 12px, 18px)}
+    .side-foot{
+      position:absolute; left:22px; right:22px; bottom:18px;
+      font-size:clamp(11px, 0.3vw + 10px, 13px); color:var(--side-muted)
+    }
 
-  /* ========= 头像名片（白底扁平） ========= */
-  .profile{ position:relative; margin:-48px auto 0; max-width:var(--content-max); padding:0 var(--content-pad); z-index:2; }
-  .profile-card{
-    background:#fff; color:var(--text); border:1px solid var(--border);
-    border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(16px, 1.2vw, 22px);
-    display:grid; gap:16px; grid-template-columns: clamp(84px, 8vw, 110px) 1fr;
-  }
-  .avatar{
-    width: clamp(84px, 8vw, 110px); height: clamp(84px, 8vw, 110px);
-    border-radius:50%;object-fit:cover;border:2px solid #fff; box-shadow:0 6px 16px rgba(0,0,0,.12)
-  }
+    /* ========= 顶部横幅 ========= */
+    .hero{
+      position:relative; height:var(--hero-height); width:100%; overflow:hidden;
+      border-bottom:1px solid var(--border);
+    }
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, var(--hero-overlay), var(--hero-overlay)),
+        url('/images/hero.jpg') center/cover no-repeat; /* 替换为你的横幅图 */
+      filter:saturate(1.05) brightness(0.95);
+      z-index:0;
+    }
+    .hero-inner{
+      position:relative; z-index:1; height:100%;
+      display:flex; align-items:end; justify-content:center; text-align:center;
+      padding:18px; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.3)
+    }
+    .hero p{margin:.35em 0 0; font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:clamp(14px, 0.7vw + 12px, 18px)}
 
-  /* ========= 主内容：扁平分节 ========= */
-  main{flex:1; max-width:var(--content-max); padding: var(--content-pad) var(--content-pad) 60px; margin:0 auto}
-  section{padding: clamp(16px, 1.4vw, 24px) 0; border-bottom:1px solid var(--border)}
-  section:last-of-type{border-bottom:none}
-  h2{margin:0 0 clamp(10px, 0.8vw, 14px); font-size:var(--font-h2)}
+    /* ========= 头像名片 ========= */
+    .profile{ position:relative; margin:-48px auto 0; max-width:var(--content-max); padding:0 var(--content-pad); z-index:2; }
+    .profile-card{
+      background:#fff; color:var(--text); border:1px solid var(--border);
+      border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(16px, 1.2vw, 22px);
+      display:grid; gap:16px; grid-template-columns: clamp(84px, 8vw, 110px) 1fr;
+      font-family:"IBM Plex Sans",system-ui,sans-serif;
+    }
+    .avatar{
+      width: clamp(84px, 8vw, 110px); height: clamp(84px, 8vw, 110px);
+      border-radius:50%;object-fit:cover;border:2px solid #fff; box-shadow:0 6px 16px rgba(0,0,0,.12)
+    }
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+    .chip{
+      border:1px solid var(--border); color:var(--muted);
+      padding: clamp(5px, 0.4vw, 7px) clamp(8px, 0.7vw, 12px);
+      border-radius:999px; font-size:var(--chip-size); background:#fff;
+      font-family:"IBM Plex Sans",system-ui,sans-serif;
+    }
 
-  .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
-  .chip{
-    border:1px solid var(--border); color:var(--muted);
-    padding: clamp(5px, 0.4vw, 7px) clamp(8px, 0.7vw, 12px);
-    border-radius:999px; font-size:var(--chip-size); background:#fff
-  }
+    /* ========= 主内容 ========= */
+    main{flex:1; max-width:var(--content-max); padding: var(--content-pad) var(--content-pad) 60px; margin:0 auto}
+    section{padding: clamp(16px, 1.4vw, 24px) 0; border-bottom:1px solid var(--border)}
+    section:last-of-type{border-bottom:none}
 
-  /* ========= Research：一行一个，上图下文 ========= */
-  .research .item{margin: clamp(16px, 1.2vw, 22px) 0; border-bottom:1px dashed var(--border); padding-bottom: clamp(14px, 1vw, 18px)}
-  .research .item:last-child{border-bottom:none}
-  .research .thumb{width:100%; height:auto; border:1px solid var(--border); border-radius:10px; background:#fff; box-shadow:var(--shadow)}
-  .research .title{margin:10px 0 6px; font-weight:800; font-size:var(--font-h3)}
-  .research .desc{color:var(--text); line-height:1.85; font-size: clamp(16px, 0.6vw + 14px, 20px)}
-  .research .meta{color:var(--muted); font-size: clamp(13px, 0.4vw + 11px, 15px); margin-top:6px}
+    /* ========= Research：一行一个，上图下文 ========= */
+    .research .item{margin: clamp(16px, 1.2vw, 22px) 0; border-bottom:1px dashed var(--border); padding-bottom: clamp(14px, 1vw, 18px)}
+    .research .item:last-child{border-bottom:none}
+    .research .thumb{width:100%; height:auto; border:1px solid var(--border); border-radius:10px; background:#fff; box-shadow:var(--shadow)}
+    .research .title{margin:10px 0 6px; font-weight:800}
+    .research .desc{color:var(--text); line-height:1.9; font-size: clamp(16px, 0.6vw + 14px, 20px)}
+    .research .meta{color:var(--muted); font-size: clamp(13px, 0.4vw + 11px, 15px); margin-top:6px; font-family:"IBM Plex Sans",system-ui,sans-serif;}
 
-  /* ========= Publications：编号列表（更大，更易读） ========= */
-  .pubs{list-style:decimal; padding-left: clamp(20px, 1.2vw, 26px); margin:0}
-  .pubs li{margin: clamp(8px, 0.8vw, 14px) 0; font-size: clamp(16px, 0.6vw + 14px, 20px); line-height:1.9}
-  .pubs i{font-style:italic}
+    /* ========= Publications：编号从新到旧 ========= */
+    .pubs{list-style:decimal; padding-left: clamp(20px, 1.2vw, 26px); margin:0}
+    .pubs li{margin: clamp(8px, 0.8vw, 14px) 0; font-size: clamp(16px, 0.6vw + 14px, 20px); line-height:1.9}
+    .pubs i{font-style:italic}
 
-  /* ========= 移动端（≤980px）：左栏变顶部，内容全宽） ========= */
-  .topbar{display:none}
-  @media (max-width:980px){
-    .wrap{display:block}
-    .sidenav{position:relative; height:auto; width:auto; border-right:none}
-    nav ul{flex-direction:row; flex-wrap:wrap}
-    .side-foot{position:static; margin-top:8px}
-    .profile{padding:0 clamp(12px, 2.5vw, 16px)}
-    main{padding: clamp(12px, 2.5vw, 16px)}
-    .profile-card{grid-template-columns: clamp(64px, 16vw, 84px) 1fr}
-    .avatar{width: clamp(64px, 16vw, 84px); height: clamp(64px, 16vw, 84px)}
-  }
-</style>
-
+    /* ========= 移动端（≤980px） ========= */
+    .topbar{display:none}
+    @media (max-width:980px){
+      .wrap{display:block}
+      .sidenav{position:relative; height:auto; width:auto; border-right:none}
+      nav ul{flex-direction:row; flex-wrap:wrap}
+      .side-foot{position:static; margin-top:8px}
+      .profile{padding:0 clamp(12px, 2.5vw, 16px)}
+      main{padding: clamp(12px, 2.5vw, 16px)}
+      .profile-card{grid-template-columns: clamp(64px, 16vw, 84px) 1fr}
+      .avatar{width: clamp(64px, 16vw, 84px); height: clamp(64px, 16vw, 84px)}
+    }
+  </style>
 </head>
 
 <body>
@@ -182,15 +181,10 @@
       <div class="brand">
         <span class="dot"></span>
         <div>
-          <!-- TODO[姓名]：改成你的名字（可中英并列） -->
           <h1>Huan Song</h1>
-
-          <!-- TODO[一句话定位]：研究方向/职位 -->
           <p>Atmospheric Chemistry</p>
         </div>
       </div>
-
-      <!-- TODO[导航菜单]：根据需要增删/改锚点名称（对应下面各 section 的 id） -->
       <nav>
         <ul>
           <li><a class="active" href="#top">Top</a></li>
@@ -202,21 +196,18 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-
-      <!-- TODO[左栏底部]：联系邮箱/版权年份（年份自动） -->
       <div class="side-foot">
         <div>songhuan@pku.edu.cn</div>
         <div>© <span id="year"></span> Huan Song</div>
       </div>
     </aside>
 
-    <!-- 主列：横幅 + 头像 + 内容 -->
+    <!-- 主列 -->
     <div style="flex:1">
       <!-- 顶部横幅 -->
       <header class="hero">
         <div class="hero-inner">
           <div>
-            <!-- TODO[横幅主标题/副标题]：改成你最想突出的研究主题/关键词 -->
             <h1>Atmospheric Multiphase Chemistry</h1>
             <p>HOx radicals · Aerosol aging · Aqueous & heterogeneous processes</p>
           </div>
@@ -226,23 +217,15 @@
       <!-- 头像名片 -->
       <div class="profile">
         <div class="profile-card">
-          <!-- TODO[头像路径]：替换为你的头像路径；支持相对路径或完整 URL -->
           <img class="avatar" src="/images/avatar.jpg" alt="Huan Song portrait" />
           <div>
-            <!-- TODO[名片标题]：可放中英文名 -->
             <h2>Huan Song 宋欢</h2>
-
-            <!-- TODO[单位/职位] -->
             <div class="muted">Peking University · College of Environmental Sciences & Engineering</div>
-
-            <!-- TODO[研究标签]：自由增删 -->
             <div class="chips" style="margin-top:8px">
               <span class="chip">HOx / H₂O₂ budgets</span>
               <span class="chip">Multiphase modeling</span>
               <span class="chip">Lab kinetics · Field obs</span>
             </div>
-
-            <!-- TODO[按钮链接]：CV 锚点/邮箱链接可改为外链 PDF 或其它联系方式 -->
             <p style="margin:10px 0 0">
               <a href="#cv" class="chip" style="border-color:#D1D5DB">CV (PDF)</a>
               <a href="mailto:songhuan@pku.edu.cn" class="chip">Contact</a>
@@ -254,10 +237,7 @@
       <main>
         <!-- About -->
         <section id="about">
-          <!-- TODO[区块标题] -->
           <h2>About</h2>
-
-          <!-- TODO[自我介绍]：建议 3–6 句，覆盖研究方向/方法/意义/应用或合作意向 -->
           <p>
             I study multiphase atmospheric chemistry with a focus on aqueous and heterogeneous oxidation pathways
             controlling HOx and peroxide budgets. My work bridges laboratory kinetic experiments, 0-D modeling, and
@@ -265,23 +245,21 @@
           </p>
         </section>
 
-        <!-- Research（每行一个：上图下文，内容可较多） -->
+        <!-- Research：一行一个，上图下文 -->
         <section id="research" class="research">
           <h2>Research</h2>
 
-          <!-- TODO[研究项目#1]：复制本 <article> 作为模板，替换图片/标题/描述/方法关键词 -->
           <article class="item">
-            <img class="thumb" src="/images/research1.jpg" alt="HOx multiphase model"> <!-- TODO[图1路径/alt] -->
-            <h3 class="title">HOx budgets in multiphase systems</h3>                  <!-- TODO[标题] -->
-            <div class="desc">                                                        <!-- TODO[描述]：可写多段 -->
+            <img class="thumb" src="/images/research1.jpg" alt="HOx multiphase model">
+            <h3 class="title">HOx budgets in multiphase systems</h3>
+            <div class="desc">
               Using the PKU-MARK kinetic framework, we quantify HO₂ uptake and condensed-phase peroxide production
               across aerosol and cloud-relevant regimes. The parameterization aligns with recommended IUPAC kinetics
               and is evaluated against chamber/flow-tube constraints.
             </div>
-            <div class="meta">Methods: box/0-D modeling · uptake parameterization · sensitivity analysis</div> <!-- TODO[关键词] -->
+            <div class="meta">Methods: box/0-D modeling · uptake parameterization · sensitivity analysis</div>
           </article>
 
-          <!-- TODO[研究项目#2] -->
           <article class="item">
             <img class="thumb" src="/images/research2.jpg" alt="ESR radicals detection">
             <h3 class="title">Radicals detection by ESR and LIF</h3>
@@ -293,7 +271,6 @@
             <div class="meta">Methods: ESR · LIF · flow tube · metal-catalyzed reactions</div>
           </article>
 
-          <!-- TODO[研究项目#3] -->
           <article class="item">
             <img class="thumb" src="/images/research3.jpg" alt="Field campaign">
             <h3 class="title">Observation–model integration</h3>
@@ -303,73 +280,57 @@
             </div>
             <div class="meta">Methods: field observations · constrained box models · radical budgets</div>
           </article>
-
-          <!-- 提示：继续添加更多研究项目 => 复制 <article class="item"> 块 -->
         </section>
 
-        <!-- Publications（编号列表；从新到旧；自动倒序编号）
-             TODO[用法]：
-             1) 保持 <ol class="pubs" reversed> 不变，最新条目写在最前面；
-             2) 每条 <li> 内可以添加 DOI/PDF 链接（a 标签），也可加 * 通讯作者等标记；
-             3) 不用按年份分组，只保持从新到旧排列。 -->
+        <!-- Publications：编号列表，从新到旧（自动倒序编号） -->
         <section id="pubs">
           <h2>Publications</h2>
           <ol class="pubs" reversed>
-            <!-- TODO[条目#1 最新]：替换作者/年份/题目/期刊；可添加 DOI/PDF 链接 -->
             <li>
               <b>Song, H.</b>, Lu, K., Dong, H., Tan, Z., Chen, Z., Zeng, L., Zhang, Y. (2024).
               Aerosol particle effects on atmospheric budgets of H₂O₂ and HOx — a multiphase model study.
-              <i>EGU24</i>. <!-- 可加：<a href="https://doi.org/...">DOI</a> · <a href="/files/xxx.pdf">PDF</a> -->
+              <i>EGU24</i>.
             </li>
-
             <li>
               <b>Song, H.</b>, Chen, X., <i>Lu, K.D.</i>, et al. (2024).
               Influence of aerosol copper on HO₂ uptake: parameterized equation and evaluation.
               <i>Atmospheric Chemistry and Physics</i>.
             </li>
-
             <li>
               <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2023).
               Impact of in-situ peroxide formation by metal complexes on H₂O₂ budgets.
               <i>Science of the Total Environment</i>, submitted.
             </li>
-
             <li>
               Ye, C., <i>Lu, K.D.</i>, <b>Song, H.</b>, Mu, Y., et al. (2022).
               A critical review of sulfate aerosol formation during winter polluted periods.
               <i>Journal of Environmental Sciences</i>. DOI: 10.1016/j.jes.2022.07.011
             </li>
-
             <li>
               <b>Song, H.</b>, <i>Lu, K.D.</i>, Ye, C., et al. (2021).
               A comprehensive observational-based multiphase chemical model analysis of SO₂ oxidations in summer & winter.
               <i>Atmospheric Chemistry and Physics</i>. DOI: 10.5194/acp-21-13713-2021
             </li>
-
             <li>
               <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2021).
               Reduced aerosol uptake of HO₂ may increase the sensitivity of O₃ production to VOCs.
               <i>Environmental Science & Technology Letters</i>. DOI: 10.1021/acs.estlett.1c00893
             </li>
-
             <li>
               <b>Song, H.</b>, Zou, Q., <i>Lu, K.D.</i> (2020).
               Parameterization and application of HO₂ heterogeneous uptake coefficient.
               <i>Progress in Chemistry</i>. DOI: 10.7536/PC200749
             </li>
-
             <li>
               Zou, Q., <b>Song, H.</b>, Tang, M., <i>Lu, K.</i> (2019).
               Measurements of HO₂ uptake coefficient on aqueous (NH₄)₂SO₄ aerosol using LIF flow tube.
               <i>Chinese Chemical Letters</i>. DOI: 10.1016/j.cclet.2019.07.041
             </li>
-
             <li>
               <b>Song, H.</b>, Zhang, G., Wang, H., et al. (2016).
               Research progress on co-digestion of sludge and other substrates.
               <i>Industrial Water and Wastewater</i>. DOI: 10.3969/j.issn.1009-2455.2016.04.001
             </li>
-
             <li>
               Wang, Y., Zhang, G., Zhang, P., Yang, G., <b>Song, H.</b>, Yang, A. (2016).
               Research progress in anaerobic fermentation of sludge for hydrogen production.
@@ -381,8 +342,7 @@
         <!-- Talks -->
         <section id="talks">
           <h2>Talks</h2>
-          <!-- TODO[报告列表]：按需要增删；可加链接到 abstract/slides/video -->
-          <ul style="padding-left:18px; margin:8px 0">
+          <ul style="padding-left:22px; margin:8px 0; font-family:'IBM Plex Sans',system-ui,sans-serif">
             <li>EGU 2024 — AS3.33 oral, Vienna.</li>
             <li>AGU 2019 — A11K poster, San Francisco.</li>
           </ul>
@@ -391,34 +351,33 @@
         <!-- CV -->
         <section id="cv">
           <h2>Curriculum Vitae</h2>
-          <!-- TODO[CV 文件]：把 href 改成你的 PDF 路径；也可外链 Google Drive 等 -->
-          <p>Download: <a class="chip" href="/files/HuanSong_CV.pdf" target="_blank" rel="noreferrer">CV (PDF)</a></p>
+          <p style="font-family:'IBM Plex Sans',system-ui,sans-serif">
+            Download: <a class="chip" href="/files/HuanSong_CV.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
+          </p>
         </section>
 
         <!-- Contact -->
         <section id="contact">
           <h2>Contact</h2>
-          <!-- TODO[联系方式]：邮箱/地址/学术主页/社交媒体（增删链接皆可） -->
           <p>Email: <a href="mailto:songhuan@pku.edu.cn">songhuan@pku.edu.cn</a></p>
           <p>College of Environmental Sciences & Engineering, Peking University</p>
-          <p>
+          <p style="font-family:'IBM Plex Sans',system-ui,sans-serif">
             <a href="https://scholar.google.com/" target="_blank" rel="noreferrer">Google Scholar</a> ·
             <a href="https://orcid.org/" target="_blank" rel="noreferrer">ORCID</a> ·
             <a href="https://github.com/huansong-uw" target="_blank" rel="noreferrer">GitHub</a>
           </p>
-          <p class="muted">Last updated: <span id="lastUpdate"></span></p> <!-- TODO[更新时间]：自动生成，无需手动改 -->
+          <p class="muted" style="font-family:'IBM Plex Sans',system-ui,sans-serif">Last updated: <span id="lastUpdate"></span></p>
         </section>
 
-        <!-- 页脚 -->
         <section>
-          <p class="muted">© <span id="year"></span> Huan Song · Built on GitHub Pages · <a href="#top">↑ Back to top</a></p>
+          <p class="muted" style="font-family:'IBM Plex Sans',system-ui,sans-serif">© <span id="year"></span> Huan Song · Built on GitHub Pages · <a href="#top">↑ Back to top</a></p>
         </section>
       </main>
     </div>
   </div>
 
   <script>
-    // TODO[导航高亮]：自动根据滚动高亮左侧菜单；不需要可删除整个脚本块
+    // 左侧导航随滚动高亮
     const links=[...document.querySelectorAll('nav a')];
     const targets=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
     const io=new IntersectionObserver(es=>{
@@ -431,7 +390,7 @@
     },{rootMargin:"-40% 0px -55% 0px", threshold:0});
     targets.forEach(t=>io.observe(t));
 
-    // TODO[年份与更新时间]：自动写当前年份与今天日期到页面
+    // 年份与更新时间
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('lastUpdate').textContent = new Date().toISOString().slice(0,10);
   </script>
