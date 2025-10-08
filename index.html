@@ -13,149 +13,166 @@
   <!-- TODO[字体]：想换字体，改 family；不用额外字体就删掉整行 -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
 
-  <style>
-    /* ========= 主题变量（配色/尺寸，一处改全站生效） ========= */
-    :root{
-      /* TODO[全局背景色]：整页背景（你要的浅蓝） */
-      --bg:      #EFF6FF;
+ <style>
+  /* ========= 主题变量（配色不变，新增一组排版尺寸变量） ========= */
+  :root{
+    /* 颜色（与你当前一致） */
+    --bg:      #EFF6FF;
+    --text:    #1F2937;
+    --muted:   #6B7280;
+    --border:  #E5E7EB;
+    --brand:   #3B82F6;
+    --accent:  #06B6D4;
+    --side-bg:     #0B1F3A;
+    --side-border: #0B1F3A;
+    --side-text:   #E8EEF9;
+    --side-muted:  #A9B7D3;
+    --side-hover:  rgba(255,255,255,.08);
+    --side-active: rgba(255,255,255,.16);
 
-      /* TODO[正文文字颜色]：主文字/次文字/分隔线 */
-      --text:    #1F2937;
-      --muted:   #6B7280;
-      --border:  #E5E7EB;
+    --radius:  14px;
+    --shadow:  0 6px 18px rgba(0,0,0,.06);
 
-      /* TODO[品牌色]：链接/按钮主色与强调色 */
-      --brand:   #3B82F6;    /* 链接主色（可改如 #2563EB 更深） */
-      --accent:  #06B6D4;    /* 强调色（用于小圆点、装饰） */
+    /* 顶部横幅（高度也做成自适应） */
+    --hero-height: clamp(36vh, 28vh + 10vw, 60vh);
+    --hero-overlay: rgba(0,0,0,.25);
 
-      /* TODO[左侧栏配色]：深蓝纯色 + 浅色文字 + 半透明白高亮 */
-      --side-bg:     #0B1F3A;               /* 左栏底色（深蓝） */
-      --side-border: #0B1F3A;               /* 右侧分隔线（通常同底色） */
-      --side-text:   #E8EEF9;               /* 左栏文字（浅色） */
-      --side-muted:  #A9B7D3;               /* 左栏次文字 */
-      --side-hover:  rgba(255,255,255,.08); /* 左栏悬停底色 */
-      --side-active: rgba(255,255,255,.16); /* 左栏选中底色 */
+    /* ======== 新增：排版尺寸（全站放大 + 自适应） ======== */
+    /* 基础正文字号：小屏≥18px，大屏缓慢增至20–21px */
+    --font-size-base: clamp(18px, 0.9vw + 14px, 21px);
+    --line-height-base: 1.8;
 
-      /* TODO[视觉细节]：圆角/阴影，想更“方”就把 14px 改小 */
-      --radius:  14px;
-      --shadow:  0 6px 18px rgba(0,0,0,.06);
+    /* 各级标题（随屏宽放大） */
+    --font-h1: clamp(36px, 3.4vw + 12px, 58px); /* 顶部横幅主标题 */
+    --font-h2: clamp(22px, 1.2vw + 14px, 30px); /* 区块标题 */
+    --font-h3: clamp(18px, 1.0vw + 12px, 24px); /* 研究内小标题 */
 
-      /* TODO[横幅尺寸/遮罩]：高度 & 遮罩强度（0~1，越大越暗） */
-      --hero-height: 44vh;
-      --hero-overlay: rgba(0,0,0,.25);
-    }
+    /* 组件尺寸 */
+    --chip-size: clamp(12px, 0.25vw + 11px, 14px);
+    --nav-pad-v: clamp(8px, 0.5vw + 6px, 12px);
+    --nav-pad-h: clamp(10px, 0.6vw + 8px, 14px);
 
-    /* ========= 基础排版 ========= */
-    html{scroll-behavior:smooth}
-    body{
-      margin:0; background:var(--bg); color:var(--text);
-      /* TODO[字体栈]：若换字体，把 "Inter" 改为你的字体名；也可添加中文备选 */
-      font:16px/1.75 "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
-    }
-    a{color:var(--brand); text-decoration:none}
-    a:hover{text-decoration:underline}
-    img{max-width:100%; height:auto; display:block}
-    .muted{color:var(--muted)}
-    .wrap{display:flex; min-height:100vh}
+    /* 布局宽度 */
+    --sidenav-width: clamp(220px, 22vw, 300px);
+    --content-max: min(100%, 1100px);
+    --content-pad: clamp(16px, 1.8vw, 28px);
+  }
 
-    /* ========= 左侧导航（深蓝纯色 + 浅色文字） ========= */
-    .sidenav{
-      width:260px; flex:0 0 260px; position:sticky; top:0; height:100vh;
-      padding:22px; box-sizing:border-box;
-      border-right:1px solid var(--side-border); /* TODO[左栏右侧边线]：不要边线可改 none */
-      background: var(--side-bg);               /* 左栏底色（纯色） */
-    }
-    .brand{display:flex; gap:12px; align-items:center; margin-bottom:12px}
-    .dot{width:12px;height:12px;border-radius:50%;
-      /* TODO[左栏小圆点颜色]：可与 --accent 保持一致或换成其它亮色 */
-      background:#22D3EE; box-shadow:0 0 14px rgba(34,211,238,.6)}
-    .brand h1{margin:0; font-size:22px; line-height:1.2; color:#fff}  /* TODO[左栏姓名]：下方 HTML 里改文本 */
-    .brand p{margin:6px 0 0; font-size:13px; color:var(--side-muted)} /* TODO[左栏一句话定位] */
+  /* ========= 基础排版 ========= */
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font: var(--font-size-base)/var(--line-height-base) "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+  }
+  a{color:var(--brand); text-decoration:none}
+  a:hover{text-decoration:underline}
+  img{max-width:100%; height:auto; display:block}
+  .muted{color:var(--muted)}
+  .wrap{display:flex; min-height:100vh}
 
-    nav ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-    .sidenav nav a{
-      display:block; padding:10px 12px; border-radius:10px;
-      color: var(--side-text); border:1px solid transparent; background: transparent;
-      transition: background .15s ease;
-    }
-    .sidenav nav a:hover{  background: var(--side-hover);  border-color: transparent; } /* TODO[悬停]：透明度可调 */
-    .sidenav nav a.active{ background: var(--side-active); border-color: transparent; box-shadow: none; } /* TODO[选中] */
+  /* ========= 左侧导航（深蓝纯色 + 浅色文字） ========= */
+  .sidenav{
+    width:var(--sidenav-width); flex:0 0 var(--sidenav-width);
+    position:sticky; top:0; height:100vh;
+    padding:22px; box-sizing:border-box;
+    border-right:1px solid var(--side-border);
+    background: var(--side-bg);
+  }
+  .brand{display:flex; gap:12px; align-items:center; margin-bottom:12px}
+  .dot{width:12px;height:12px;border-radius:50%; background:#22D3EE; box-shadow:0 0 14px rgba(34,211,238,.6)}
+  .brand h1{margin:0; font-size:clamp(20px, 1.2vw + 14px, 26px); line-height:1.2; color:#fff}
+  .brand p{margin:6px 0 0; font-size:clamp(12px, 0.5vw + 10px, 14px); color:var(--side-muted)}
 
-    .side-foot{position:absolute; left:22px; right:22px; bottom:18px; font-size:12px; color:var(--side-muted)}
-    /* TODO[左栏底部信息]：邮箱/版权（HTML 里改具体文本） */
+  nav ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .sidenav nav a{
+    display:block;
+    padding: var(--nav-pad-v) var(--nav-pad-h);
+    border-radius:10px;
+    color: var(--side-text); border:1px solid transparent; background: transparent;
+    transition: background .15s ease;
+    font-size: clamp(14px, 0.4vw + 12px, 16px);
+  }
+  .sidenav nav a:hover{  background: var(--side-hover);  border-color: transparent; }
+  .sidenav nav a.active{ background: var(--side-active); border-color: transparent; box-shadow: none; }
 
-    /* ========= 顶部横幅 ========= */
-    .hero{
-      position:relative; height:var(--hero-height); width:100%; overflow:hidden;
-      border-bottom:1px solid var(--border);
-    }
-    .hero::before{
-      /* TODO[横幅背景图]：把 /images/hero.jpg 换成你的图片路径或网络图（尽量横向大图） */
-      content:""; position:absolute; inset:0;
-      background:
-        linear-gradient(180deg, var(--hero-overlay), var(--hero-overlay)), /* TODO[遮罩强度]：在 :root 改 --hero-overlay */
-        url('/images/hero.jpg') center/cover no-repeat;
-      filter:saturate(1.05) brightness(0.95); /* TODO[色彩/亮度微调]：可删或改数值 */
-      z-index:0;
-    }
-    .hero-inner{
-      position:relative; z-index:1; height:100%;
-      display:flex; align-items:end; justify-content:center; text-align:center;
-      padding:18px; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.3)
-    }
-    .hero h1{margin:0; font-size:36px}   /* TODO[横幅主标题文本]：HTML 里改 */
-    .hero p{margin:.35em 0 0}           /* TODO[横幅副标题文本]：HTML 里改 */
+  .side-foot{
+    position:absolute; left:22px; right:22px; bottom:18px;
+    font-size:clamp(11px, 0.3vw + 10px, 13px); color:var(--side-muted)
+  }
 
-    /* ========= 头像名片（白底扁平） ========= */
-    .profile{
-      position:relative; margin:-48px auto 0; max-width:980px; padding:0 28px; z-index:2;
-    }
-    .profile-card{
-      background:#fff; color:var(--text); border:1px solid var(--border);
-      border-radius:var(--radius); box-shadow:var(--shadow); padding:18px;
-      display:grid; gap:16px; grid-template-columns: 96px 1fr;
-    }
-    .avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid #fff; box-shadow:0 6px 16px rgba(0,0,0,.12)}
-    /* TODO[头像]：在 HTML 里把 src="/images/avatar.jpg" 改为你的头像路径；尺寸会自动裁圆 */
+  /* ========= 顶部横幅 ========= */
+  .hero{
+    position:relative; height:var(--hero-height); width:100%; overflow:hidden;
+    border-bottom:1px solid var(--border);
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, var(--hero-overlay), var(--hero-overlay)),
+      url('/images/hero.jpg') center/cover no-repeat;
+    filter:saturate(1.05) brightness(0.95);
+    z-index:0;
+  }
+  .hero-inner{
+    position:relative; z-index:1; height:100%;
+    display:flex; align-items:end; justify-content:center; text-align:center;
+    padding:18px; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.3)
+  }
+  .hero h1{margin:0; font-size:var(--font-h1)}
+  .hero p{margin:.35em 0 0; font-size:clamp(14px, 0.7vw + 12px, 18px)}
 
-    /* ========= 主内容：扁平分节 ========= */
-    main{flex:1; max-width:980px; padding:24px 28px 60px; margin:0 auto}
-    section{padding:18px 0; border-bottom:1px solid var(--border)}
-    section:last-of-type{border-bottom:none}
-    h2{margin:0 0 12px; font-size:20px}
+  /* ========= 头像名片（白底扁平） ========= */
+  .profile{ position:relative; margin:-48px auto 0; max-width:var(--content-max); padding:0 var(--content-pad); z-index:2; }
+  .profile-card{
+    background:#fff; color:var(--text); border:1px solid var(--border);
+    border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(16px, 1.2vw, 22px);
+    display:grid; gap:16px; grid-template-columns: clamp(84px, 8vw, 110px) 1fr;
+  }
+  .avatar{
+    width: clamp(84px, 8vw, 110px); height: clamp(84px, 8vw, 110px);
+    border-radius:50%;object-fit:cover;border:2px solid #fff; box-shadow:0 6px 16px rgba(0,0,0,.12)
+  }
 
-    /* TODO[标签样式]：可删掉 chips 整段或增删标签 */
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
-    .chip{border:1px solid var(--border); color:var(--muted); padding:6px 10px; border-radius:999px; font-size:12px; background:#fff}
+  /* ========= 主内容：扁平分节 ========= */
+  main{flex:1; max-width:var(--content-max); padding: var(--content-pad) var(--content-pad) 60px; margin:0 auto}
+  section{padding: clamp(16px, 1.4vw, 24px) 0; border-bottom:1px solid var(--border)}
+  section:last-of-type{border-bottom:none}
+  h2{margin:0 0 clamp(10px, 0.8vw, 14px); font-size:var(--font-h2)}
 
-    /* ========= Research（每行一个：上图下文，文字可较多） ========= */
-    .research .item{margin:18px 0; border-bottom:1px dashed var(--border); padding-bottom:16px}
-    .research .item:last-child{border-bottom:none}
-    .research .thumb{width:100%; height:auto; border:1px solid var(--border); border-radius:10px; background:#fff; box-shadow:var(--shadow)}
-    /* TODO[研究配图]：HTML 里每个 <img class="thumb" src="..."> 改路径即可 */
-    .research .title{margin:10px 0 6px; font-weight:700} /* TODO[研究标题]：HTML 改 */
-    .research .desc{color:var(--text); line-height:1.8}  /* TODO[研究描述]：HTML 改，可写多段 */
-    .research .meta{color:var(--muted); font-size:14px; margin-top:6px} /* TODO[研究方法/关键词]：HTML 改 */
+  .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+  .chip{
+    border:1px solid var(--border); color:var(--muted);
+    padding: clamp(5px, 0.4vw, 7px) clamp(8px, 0.7vw, 12px);
+    border-radius:999px; font-size:var(--chip-size); background:#fff
+  }
 
-    /* ========= Publications（编号列表，从新到旧） ========= */
-    .pubs{list-style:decimal; padding-left:22px; margin:0}
-    .pubs li{margin:8px 0}
-    .pubs i{font-style:italic}
-    /* TODO[发表条目样式]：字号/间距在这里调；需要更紧凑可把 margin:8px 改小 */
+  /* ========= Research：一行一个，上图下文 ========= */
+  .research .item{margin: clamp(16px, 1.2vw, 22px) 0; border-bottom:1px dashed var(--border); padding-bottom: clamp(14px, 1vw, 18px)}
+  .research .item:last-child{border-bottom:none}
+  .research .thumb{width:100%; height:auto; border:1px solid var(--border); border-radius:10px; background:#fff; box-shadow:var(--shadow)}
+  .research .title{margin:10px 0 6px; font-weight:800; font-size:var(--font-h3)}
+  .research .desc{color:var(--text); line-height:1.85; font-size: clamp(16px, 0.6vw + 14px, 20px)}
+  .research .meta{color:var(--muted); font-size: clamp(13px, 0.4vw + 11px, 15px); margin-top:6px}
 
-    /* ========= 移动端 ========= */
-    .topbar{display:none}
-    @media (max-width:980px){
-      .wrap{display:block}
-      .sidenav{position:relative; height:auto; width:auto; border-right:none} /* TODO[移动端去边线]：如需保留边线删掉这行 */
-      nav ul{flex-direction:row; flex-wrap:wrap}
-      .side-foot{position:static; margin-top:8px}
-      .profile{padding:0 16px}
-      main{padding:16px}
-      .profile-card{grid-template-columns:72px 1fr}
-      .avatar{width:72px;height:72px}
-    }
-  </style>
+  /* ========= Publications：编号列表（更大，更易读） ========= */
+  .pubs{list-style:decimal; padding-left: clamp(20px, 1.2vw, 26px); margin:0}
+  .pubs li{margin: clamp(8px, 0.8vw, 14px) 0; font-size: clamp(16px, 0.6vw + 14px, 20px); line-height:1.9}
+  .pubs i{font-style:italic}
+
+  /* ========= 移动端（≤980px）：左栏变顶部，内容全宽） ========= */
+  .topbar{display:none}
+  @media (max-width:980px){
+    .wrap{display:block}
+    .sidenav{position:relative; height:auto; width:auto; border-right:none}
+    nav ul{flex-direction:row; flex-wrap:wrap}
+    .side-foot{position:static; margin-top:8px}
+    .profile{padding:0 clamp(12px, 2.5vw, 16px)}
+    main{padding: clamp(12px, 2.5vw, 16px)}
+    .profile-card{grid-template-columns: clamp(64px, 16vw, 84px) 1fr}
+    .avatar{width: clamp(64px, 16vw, 84px); height: clamp(64px, 16vw, 84px)}
+  }
+</style>
+
 </head>
 
 <body>
