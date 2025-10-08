@@ -6,37 +6,37 @@
   <title>Huan Song | Atmospheric Chemistry</title>
   <meta name="description" content="Huan Song — atmospheric multiphase chemistry, HOx radicals, aerosol aging." />
 
-  <!-- 可选字体（想换字体就改 family；不用则删除本行） -->
+  <!-- 可选字体（想换就改 family；不用可删除本行） -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
 
   <style>
     /* ========= 主题变量 ========= */
     :root{
-      /* 背景统一浅蓝 */
-      --bg:      #EFF6FF;  /* very light blue */
+      /* 整体背景浅蓝 */
+      --bg:      #EFF6FF;
 
-      /* 正文文字与辅助色 */
-      --text:    #1F2937;  /* 深灰蓝（可读性强） */
-      --muted:   #6B7280;  /* 次要文字 */
-      --border:  #E5E7EB;  /* 分隔线 */
+      /* 正文颜色 */
+      --text:    #1F2937;
+      --muted:   #6B7280;
+      --border:  #E5E7EB;
 
-      /* 站内主色（链接/按钮） */
-      --brand:   #3B82F6;  /* blue-500（可根据喜好替换） */
-      --accent:  #06B6D4;  /* cyan-500（圆点/强调） */
+      /* 链接主色/强调 */
+      --brand:   #3B82F6;
+      --accent:  #06B6D4;
 
-      /* 左侧栏（深蓝纯色，不要渐变） */
-      --side-bg:     #0B1F3A;               /* 深蓝底色 */
-      --side-border: #0B1F3A;               /* 与底色一致或略浅 #10294A */
-      --side-text:   #E8EEF9;               /* 左栏普通文字（浅色） */
-      --side-muted:  #A9B7D3;               /* 左栏次要文字 */
-      --side-hover:  rgba(255,255,255,.08); /* 悬停底色：白色轻透明 */
-      --side-active: rgba(255,255,255,.16); /* 选中底色：白色半透明 */
+      /* 左侧栏（深蓝纯色） */
+      --side-bg:     #0B1F3A;
+      --side-border: #0B1F3A;
+      --side-text:   #E8EEF9;
+      --side-muted:  #A9B7D3;
+      --side-hover:  rgba(255,255,255,.08);
+      --side-active: rgba(255,255,255,.16);
 
-      /* 视觉细节 */
+      /* 细节 */
       --radius:  14px;
       --shadow:  0 6px 18px rgba(0,0,0,.06);
 
-      /* 顶部横幅参数 */
+      /* 顶部横幅 */
       --hero-height: 44vh;
       --hero-overlay: rgba(0,0,0,.25);
     }
@@ -53,15 +53,15 @@
     .muted{color:var(--muted)}
     .wrap{display:flex; min-height:100vh}
 
-    /* ========= 左侧导航（深蓝纯色 + 浅色文字 + 白色半透明高亮） ========= */
+    /* ========= 左侧导航 ========= */
     .sidenav{
       width:260px; flex:0 0 260px; position:sticky; top:0; height:100vh;
       padding:22px; box-sizing:border-box;
       border-right:1px solid var(--side-border);
-      background: var(--side-bg); /* 纯色，已去渐变 */
+      background: var(--side-bg);
     }
     .brand{display:flex; gap:12px; align-items:center; margin-bottom:12px}
-    .dot{width:12px;height:12px;border-radius:50%; background:#22D3EE; box-shadow:0 0 14px rgba(34,211,238,.6)} /* 圆点亮一点 */
+    .dot{width:12px;height:12px;border-radius:50%; background:#22D3EE; box-shadow:0 0 14px rgba(34,211,238,.6)}
     .brand h1{margin:0; font-size:22px; line-height:1.2; color:#fff}
     .brand p{margin:6px 0 0; font-size:13px; color:var(--side-muted)}
 
@@ -76,13 +76,13 @@
 
     .side-foot{position:absolute; left:22px; right:22px; bottom:18px; font-size:12px; color:var(--side-muted)}
 
-    /* ========= 顶部横幅（全宽背景图） ========= */
+    /* ========= 顶部横幅 ========= */
     .hero{
       position:relative; height:var(--hero-height); width:100%; overflow:hidden;
       border-bottom:1px solid var(--border);
     }
     .hero::before{
-      /* TODO[横幅图]：把 /images/hero.jpg 换成你的横幅图片路径 */
+      /* TODO: 替换为你的横幅大图路径 */
       content:""; position:absolute; inset:0;
       background:
         linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.25)),
@@ -98,7 +98,7 @@
     .hero h1{margin:0; font-size:36px}
     .hero p{margin:.35em 0 0}
 
-    /* ========= 头像名片（白底扁平卡、轻投影） ========= */
+    /* ========= 头像名片（白底扁平） ========= */
     .profile{
       position:relative; margin:-48px auto 0; max-width:980px; padding:0 28px; z-index:2;
     }
@@ -109,29 +109,30 @@
     }
     .avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid #fff; box-shadow:0 6px 16px rgba(0,0,0,.12)}
 
-    /* ========= 主内容：无 panel，扁平分节 ========= */
+    /* ========= 主内容：扁平分节 ========= */
     main{flex:1; max-width:980px; padding:24px 28px 60px; margin:0 auto}
     section{padding:18px 0; border-bottom:1px solid var(--border)}
     section:last-of-type{border-bottom:none}
-    h2{margin:0 0 10px; font-size:20px}
+    h2{margin:0 0 12px; font-size:20px}
     .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
     .chip{border:1px solid var(--border); color:var(--muted); padding:6px 10px; border-radius:999px; font-size:12px; background:#fff}
 
-    /* Research：图墙 / 列表 */
-    .research.gallery .items{display:grid; gap:14px}
-    @media (min-width:900px){ .research.gallery .items{grid-template-columns:repeat(3,1fr)} }
-    .card{background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:var(--shadow)}
-    .card img{width:100%; height:160px; object-fit:cover}
-    .card .meta{padding:10px 12px; font-size:14px; color:var(--text)}
-    .research.list ul{padding-left:18px; margin:8px 0}
-    .research.list li{margin:6px 0}
+    /* ========= Research（每行一个：上图下文，文字可较多） ========= */
+    .research .item{margin:18px 0; border-bottom:1px dashed var(--border); padding-bottom:16px}
+    .research .item:last-child{border-bottom:none}
+    .research .thumb{width:100%; height:auto; border:1px solid var(--border); border-radius:10px; background:#fff; box-shadow:var(--shadow)}
+    .research .title{margin:10px 0 6px; font-weight:700}
+    .research .desc{color:var(--text); line-height:1.8}
+    .research .meta{color:var(--muted); font-size:14px; margin-top:6px}
 
-    /* Publications：年份折叠 */
-    details{border:1px solid var(--border); border-radius:10px; background:#fff; box-shadow:var(--shadow); margin:10px 0}
-    summary{cursor:pointer; padding:10px 12px; font-weight:600; list-style:none}
-    summary::-webkit-details-marker{display:none}
-    .publist{padding:0 16px 10px 28px}
-    .publist li{margin:8px 0}
+    /* ========= Publications（全部展开，按年份分组，无折叠/无点击） ========= */
+    .years{display:flex; flex-direction:column; gap:18px}
+    .year-block{padding:8px 0; border-top:1px solid var(--border)}
+    .year-block:first-child{border-top:none}
+    .year-title{font-weight:800; margin:0 0 8px; font-size:18px}
+    .pubs{list-style:decimal; padding-left:22px; margin:0}
+    .pubs li{margin:8px 0}
+    .pubs i{font-style:italic}
 
     /* ========= 移动端 ========= */
     .topbar{display:none}
@@ -155,8 +156,8 @@
       <div class="brand">
         <span class="dot"></span>
         <div>
-          <h1>Huan Song</h1>            <!-- ← 你的姓名 -->
-          <p>Atmospheric Chemistry</p>  <!-- ← 你的头衔/研究方向一句话 -->
+          <h1>Huan Song</h1>
+          <p>Atmospheric Chemistry</p>
         </div>
       </div>
       <nav>
@@ -171,19 +172,19 @@
         </ul>
       </nav>
       <div class="side-foot">
-        <div>songhuan@pku.edu.cn</div>  <!-- ← 你的邮箱 -->
+        <div>songhuan@pku.edu.cn</div>
         <div>© <span id="year"></span> Huan Song</div>
       </div>
     </aside>
 
-    <!-- 主列：横幅 + 头像 + 内容（无 panel 扁平风） -->
+    <!-- 主列：横幅 + 头像 + 内容 -->
     <div style="flex:1">
-      <!-- 顶部横幅（风景/引入图） -->
+      <!-- 顶部横幅 -->
       <header class="hero">
         <div class="hero-inner">
           <div>
-            <h1>Atmospheric Multiphase Chemistry</h1> <!-- ← 横幅标题 -->
-            <p>HOx radicals · Aerosol aging · Aqueous & heterogeneous processes</p> <!-- ← 横幅副标题 -->
+            <h1>Atmospheric Multiphase Chemistry</h1>
+            <p>HOx radicals · Aerosol aging · Aqueous & heterogeneous processes</p>
           </div>
         </div>
       </header>
@@ -191,7 +192,7 @@
       <!-- 头像名片 -->
       <div class="profile">
         <div class="profile-card">
-          <img class="avatar" src="/images/avatar.jpg" alt="Huan Song portrait" /> <!-- 上传 /images/avatar.jpg -->
+          <img class="avatar" src="/images/avatar.jpg" alt="Huan Song portrait" />
           <div>
             <h2>Huan Song 宋欢</h2>
             <div class="muted">Peking University · College of Environmental Sciences & Engineering</div>
@@ -219,123 +220,134 @@
           </p>
         </section>
 
-        <!-- Research：图墙模式（改为 class="research list" + 下方列表可切换为纯文本） -->
-        <section id="research" class="research gallery">
+        <!-- Research（每行一个：上图下文，内容可较多） -->
+        <section id="research" class="research">
           <h2>Research</h2>
-          <div class="items">
-            <article class="card">
-              <img src="/images/research1.jpg" alt="HOx multiphase model">
-              <div class="meta"><b>HOx budgets</b> — PKU-MARK simulations of H₂O₂ & HO₂ uptake.</div>
-            </article>
-            <article class="card">
-              <img src="/images/research2.jpg" alt="ESR radicals detection">
-              <div class="meta"><b>Radicals detection</b> — ESR of OH/O₂⁻/carbonate radicals in aerosol extracts.</div>
-            </article>
-            <article class="card">
-              <img src="/images/research3.jpg" alt="Field campaigns">
-              <div class="meta"><b>Field campaign</b> — Observation–model integration across urban & marine sites.</div>
-            </article>
-          </div>
 
-          <!-- 纯文本模式示例（替换上面的 .items 并把 section 类改为 research list）
-          <ul>
-            <li>HOx budgets in multiphase systems — parameterizing HO₂ uptake.</li>
-            <li>Radicals detection by ESR; LIF measurement & flow-tube experiments.</li>
-            <li>Field observation & box-model analysis for SOA aging.</li>
-          </ul>
-          -->
+          <!-- 项目 1（示例） -->
+          <article class="item">
+            <img class="thumb" src="/images/research1.jpg" alt="HOx multiphase model">
+            <h3 class="title">HOx budgets in multiphase systems</h3>
+            <div class="desc">
+              Using the PKU-MARK kinetic framework, we quantify HO₂ uptake and condensed-phase peroxide production
+              across aerosol and cloud-relevant regimes. The parameterization aligns with recommended IUPAC kinetics
+              and is evaluated against chamber/flow-tube constraints.
+            </div>
+            <div class="meta">Methods: box/0-D modeling · uptake parameterization · sensitivity analysis</div>
+          </article>
+
+          <!-- 项目 2（示例） -->
+          <article class="item">
+            <img class="thumb" src="/images/research2.jpg" alt="ESR radicals detection">
+            <h3 class="title">Radicals detection by ESR and LIF</h3>
+            <div class="desc">
+              We detect OH, superoxide and carbonate radicals in aerosol extracts under simulated sunlight, and combine
+              LIF-based HO₂ measurements in an FEP-coated flow tube to constrain uptake coefficients for metal-doped
+              sulfate aerosols.
+            </div>
+            <div class="meta">Methods: ESR · LIF · flow tube · metal-catalyzed reactions</div>
+          </article>
+
+          <!-- 项目 3（示例） -->
+          <article class="item">
+            <img class="thumb" src="/images/research3.jpg" alt="Field campaign">
+            <h3 class="title">Observation–model integration</h3>
+            <div class="desc">
+              Multi-site field campaigns (urban/marine) are combined with constrained chemical boxes to diagnose ROx
+              production budgets, evaluate multiphase pathways, and assess implications for SOA aging and oxidant cycles.
+            </div>
+            <div class="meta">Methods: field observations · constrained box models · radical budgets</div>
+          </article>
+
+          <!-- 需要更多研究项目：复制上面 <article class="item">…</article>，替换图片与文本 -->
         </section>
 
-        <!-- Publications（全部） -->
+        <!-- Publications（全部展开，按年份分组） -->
         <section id="pubs">
           <h2>Publications (All)</h2>
+          <div class="years">
 
-          <details open>
-            <summary>2024 &nbsp; <span class="muted">(2)</span></summary>
-            <ul class="publist">
-              <li>
-                <b>Song, H.</b>, Lu, K., Dong, H., Tan, Z., Chen, Z., Zeng, L., Zhang, Y. (2024).
-                Aerosol particle effects on atmospheric budgets of H₂O₂ and HOx — a multiphase model study.
-                <i>EGU24</i>.
-                <a href="#" target="_blank" rel="noreferrer">abstract</a> ·
-                <a href="#" target="_blank" rel="noreferrer">slides</a> ·
-                <a href="/files/2024_song_hox.pdf" target="_blank" rel="noreferrer">PDF</a>
-              </li>
-              <li>
-                <b>Song, H.</b>, Chen, X., <i>Lu, K.D.</i>, et al. (2024).
-                Influence of aerosol copper on HO₂ uptake: parameterized equation and evaluation.
-                <i>Atmospheric Chemistry and Physics</i>.
-                <a href="https://doi.org/10.xxxx/xxxxx" target="_blank" rel="noreferrer">DOI</a>
-              </li>
-            </ul>
-          </details>
+            <!-- 年份块：按需要添加更多年份；条目越多越好，全部直接显示 -->
+            <div class="year-block">
+              <h3 class="year-title">2024</h3>
+              <ol class="pubs">
+                <li>
+                  <b>Song, H.</b>, Lu, K., Dong, H., Tan, Z., Chen, Z., Zeng, L., Zhang, Y. (2024).
+                  Aerosol particle effects on atmospheric budgets of H₂O₂ and HOx — a multiphase model study.
+                  <i>EGU24</i>. <!-- 可追加：DOI / PDF 链接 -->
+                </li>
+                <li>
+                  <b>Song, H.</b>, Chen, X., <i>Lu, K.D.</i>, et al. (2024).
+                  Influence of aerosol copper on HO₂ uptake: parameterized equation and evaluation.
+                  <i>Atmospheric Chemistry and Physics</i>.
+                </li>
+              </ol>
+            </div>
 
-          <details>
-            <summary>2023 &nbsp; <span class="muted">(1)</span></summary>
-            <ul class="publist">
-              <li>
-                <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2023).
-                Impact of in-situ peroxide formation by metal complexes on H₂O₂ budgets.
-                <i>Science of the Total Environment</i>, submitted.
-              </li>
-            </ul>
-          </details>
+            <div class="year-block">
+              <h3 class="year-title">2023</h3>
+              <ol class="pubs">
+                <li>
+                  <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2023).
+                  Impact of in-situ peroxide formation by metal complexes on H₂O₂ budgets.
+                  <i>Science of the Total Environment</i>, submitted.
+                </li>
+              </ol>
+            </div>
 
-          <details>
-            <summary>2022 &nbsp; <span class="muted">(1)</span></summary>
-            <ul class="publist">
-              <li>
-                Ye, C., <i>Lu, K.D.</i>, <b>Song, H.</b>, Mu, Y., et al. (2022).
-                Review of sulfate aerosol formation during winter pollution.
-                <i>Journal of Environmental Sciences</i>.
-                <a href="https://doi.org/10.1016/j.jes.2022.07.011" target="_blank" rel="noreferrer">DOI</a>
-              </li>
-            </ul>
-          </details>
+            <div class="year-block">
+              <h3 class="year-title">2022</h3>
+              <ol class="pubs">
+                <li>
+                  Ye, C., <i>Lu, K.D.</i>, <b>Song, H.</b>, Mu, Y., et al. (2022).
+                  Review of sulfate aerosol formation during winter pollution.
+                  <i>Journal of Environmental Sciences</i>.
+                </li>
+              </ol>
+            </div>
 
-          <details>
-            <summary>2021 &nbsp; <span class="muted">(2)</span></summary>
-            <ul class="publist">
-              <li>
-                <b>Song, H.</b>, <i>Lu, K.D.</i>, Ye, C., et al. (2021).
-                Multiphase model analysis of SO₂ oxidations in summer & winter.
-                <i>Atmospheric Chemistry and Physics</i>.
-                <a href="https://doi.org/10.5194/acp-21-13713-2021" target="_blank" rel="noreferrer">DOI</a>
-              </li>
-              <li>
-                <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2021).
-                Reduced aerosol uptake of HO₂ may increase O₃ sensitivity to VOCs.
-                <i>Environmental Science & Technology Letters</i>.
-                <a href="https://doi.org/10.1021/acs.estlett.1c00893" target="_blank" rel="noreferrer">DOI</a>
-              </li>
-            </ul>
-          </details>
+            <div class="year-block">
+              <h3 class="year-title">2021</h3>
+              <ol class="pubs">
+                <li>
+                  <b>Song, H.</b>, <i>Lu, K.D.</i>, Ye, C., et al. (2021).
+                  Multiphase model analysis of SO₂ oxidations in summer & winter.
+                  <i>Atmospheric Chemistry and Physics</i>.
+                </li>
+                <li>
+                  <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2021).
+                  Reduced aerosol uptake of HO₂ may increase O₃ sensitivity to VOCs.
+                  <i>Environmental Science & Technology Letters</i>.
+                </li>
+              </ol>
+            </div>
 
-          <details>
-            <summary>2020 &nbsp; <span class="muted">(2)</span></summary>
-            <ul class="publist">
-              <li>
-                <b>Song, H.</b>, Zou, Q., <i>Lu, K.D.</i> (2020).
-                Parameterization and application of HO₂ heterogeneous uptake coefficient.
-                <i>Progress in Chemistry</i>.
-                <a href="https://doi.org/10.7536/PC200749" target="_blank" rel="noreferrer">DOI</a>
-              </li>
-              <li>
-                Zou, Q., <b>Song, H.</b>, Tang, M., <i>Lu, K.</i> (2019/2020).
-                HO₂ uptake on aqueous (NH₄)₂SO₄ aerosol with LIF flow tube.
-                <i>Chinese Chemical Letters</i>.
-                <a href="https://doi.org/10.1016/j.cclet.2019.07.041" target="_blank" rel="noreferrer">DOI</a>
-              </li>
-            </ul>
-          </details>
+            <div class="year-block">
+              <h3 class="year-title">2020</h3>
+              <ol class="pubs">
+                <li>
+                  <b>Song, H.</b>, Zou, Q., <i>Lu, K.D.</i> (2020).
+                  Parameterization and application of HO₂ heterogeneous uptake coefficient.
+                  <i>Progress in Chemistry</i>.
+                </li>
+                <li>
+                  Zou, Q., <b>Song, H.</b>, Tang, M., <i>Lu, K.</i> (2019/2020).
+                  HO₂ uptake on aqueous (NH₄)₂SO₄ aerosol with LIF flow tube.
+                  <i>Chinese Chemical Letters</i>.
+                </li>
+              </ol>
+            </div>
+
+            <!-- 继续添加更多年份块（2019、2018...），把所有发表都放进来 -->
+          </div>
         </section>
 
         <!-- Talks -->
         <section id="talks">
           <h2>Talks</h2>
           <ul style="padding-left:18px; margin:8px 0">
-            <li>EGU 2024 — AS3.33 oral, Vienna. <a href="#" target="_blank" rel="noreferrer">abstract</a></li>
-            <li>AGU 2019 — A11K poster, San Francisco. <a href="#" target="_blank" rel="noreferrer">abstract</a></li>
+            <li>EGU 2024 — AS3.33 oral, Vienna.</li>
+            <li>AGU 2019 — A11K poster, San Francisco.</li>
           </ul>
         </section>
 
