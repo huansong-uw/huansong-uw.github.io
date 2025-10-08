@@ -3,40 +3,44 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- TODO[站点标题/SEO]：浏览器标签页显示的标题；也会影响搜索引擎 -->
   <title>Huan Song | Atmospheric Chemistry</title>
+
+  <!-- TODO[SEO 描述]：搜索结果摘要/社交分享描述 -->
   <meta name="description" content="Huan Song — atmospheric multiphase chemistry, HOx radicals, aerosol aging." />
 
-  <!-- 可选字体（想换就改 family；不用可删除本行） -->
+  <!-- TODO[字体]：想换字体，改 family；不用额外字体就删掉整行 -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
 
   <style>
-    /* ========= 主题变量 ========= */
+    /* ========= 主题变量（配色/尺寸，一处改全站生效） ========= */
     :root{
-      /* 整体背景浅蓝 */
+      /* TODO[全局背景色]：整页背景（你要的浅蓝） */
       --bg:      #EFF6FF;
 
-      /* 正文颜色 */
+      /* TODO[正文文字颜色]：主文字/次文字/分隔线 */
       --text:    #1F2937;
       --muted:   #6B7280;
       --border:  #E5E7EB;
 
-      /* 链接主色/强调 */
-      --brand:   #3B82F6;
-      --accent:  #06B6D4;
+      /* TODO[品牌色]：链接/按钮主色与强调色 */
+      --brand:   #3B82F6;    /* 链接主色（可改如 #2563EB 更深） */
+      --accent:  #06B6D4;    /* 强调色（用于小圆点、装饰） */
 
-      /* 左侧栏（深蓝纯色） */
-      --side-bg:     #0B1F3A;
-      --side-border: #0B1F3A;
-      --side-text:   #E8EEF9;
-      --side-muted:  #A9B7D3;
-      --side-hover:  rgba(255,255,255,.08);
-      --side-active: rgba(255,255,255,.16);
+      /* TODO[左侧栏配色]：深蓝纯色 + 浅色文字 + 半透明白高亮 */
+      --side-bg:     #0B1F3A;               /* 左栏底色（深蓝） */
+      --side-border: #0B1F3A;               /* 右侧分隔线（通常同底色） */
+      --side-text:   #E8EEF9;               /* 左栏文字（浅色） */
+      --side-muted:  #A9B7D3;               /* 左栏次文字 */
+      --side-hover:  rgba(255,255,255,.08); /* 左栏悬停底色 */
+      --side-active: rgba(255,255,255,.16); /* 左栏选中底色 */
 
-      /* 细节 */
+      /* TODO[视觉细节]：圆角/阴影，想更“方”就把 14px 改小 */
       --radius:  14px;
       --shadow:  0 6px 18px rgba(0,0,0,.06);
 
-      /* 顶部横幅 */
+      /* TODO[横幅尺寸/遮罩]：高度 & 遮罩强度（0~1，越大越暗） */
       --hero-height: 44vh;
       --hero-overlay: rgba(0,0,0,.25);
     }
@@ -45,6 +49,7 @@
     html{scroll-behavior:smooth}
     body{
       margin:0; background:var(--bg); color:var(--text);
+      /* TODO[字体栈]：若换字体，把 "Inter" 改为你的字体名；也可添加中文备选 */
       font:16px/1.75 "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
     }
     a{color:var(--brand); text-decoration:none}
@@ -53,17 +58,19 @@
     .muted{color:var(--muted)}
     .wrap{display:flex; min-height:100vh}
 
-    /* ========= 左侧导航 ========= */
+    /* ========= 左侧导航（深蓝纯色 + 浅色文字） ========= */
     .sidenav{
       width:260px; flex:0 0 260px; position:sticky; top:0; height:100vh;
       padding:22px; box-sizing:border-box;
-      border-right:1px solid var(--side-border);
-      background: var(--side-bg);
+      border-right:1px solid var(--side-border); /* TODO[左栏右侧边线]：不要边线可改 none */
+      background: var(--side-bg);               /* 左栏底色（纯色） */
     }
     .brand{display:flex; gap:12px; align-items:center; margin-bottom:12px}
-    .dot{width:12px;height:12px;border-radius:50%; background:#22D3EE; box-shadow:0 0 14px rgba(34,211,238,.6)}
-    .brand h1{margin:0; font-size:22px; line-height:1.2; color:#fff}
-    .brand p{margin:6px 0 0; font-size:13px; color:var(--side-muted)}
+    .dot{width:12px;height:12px;border-radius:50%;
+      /* TODO[左栏小圆点颜色]：可与 --accent 保持一致或换成其它亮色 */
+      background:#22D3EE; box-shadow:0 0 14px rgba(34,211,238,.6)}
+    .brand h1{margin:0; font-size:22px; line-height:1.2; color:#fff}  /* TODO[左栏姓名]：下方 HTML 里改文本 */
+    .brand p{margin:6px 0 0; font-size:13px; color:var(--side-muted)} /* TODO[左栏一句话定位] */
 
     nav ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
     .sidenav nav a{
@@ -71,10 +78,11 @@
       color: var(--side-text); border:1px solid transparent; background: transparent;
       transition: background .15s ease;
     }
-    .sidenav nav a:hover{  background: var(--side-hover);  border-color: transparent; }
-    .sidenav nav a.active{ background: var(--side-active); border-color: transparent; box-shadow: none; }
+    .sidenav nav a:hover{  background: var(--side-hover);  border-color: transparent; } /* TODO[悬停]：透明度可调 */
+    .sidenav nav a.active{ background: var(--side-active); border-color: transparent; box-shadow: none; } /* TODO[选中] */
 
     .side-foot{position:absolute; left:22px; right:22px; bottom:18px; font-size:12px; color:var(--side-muted)}
+    /* TODO[左栏底部信息]：邮箱/版权（HTML 里改具体文本） */
 
     /* ========= 顶部横幅 ========= */
     .hero{
@@ -82,12 +90,12 @@
       border-bottom:1px solid var(--border);
     }
     .hero::before{
-      /* TODO: 替换为你的横幅大图路径 */
+      /* TODO[横幅背景图]：把 /images/hero.jpg 换成你的图片路径或网络图（尽量横向大图） */
       content:""; position:absolute; inset:0;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.25)),
+        linear-gradient(180deg, var(--hero-overlay), var(--hero-overlay)), /* TODO[遮罩强度]：在 :root 改 --hero-overlay */
         url('/images/hero.jpg') center/cover no-repeat;
-      filter:saturate(1.05) brightness(0.95);
+      filter:saturate(1.05) brightness(0.95); /* TODO[色彩/亮度微调]：可删或改数值 */
       z-index:0;
     }
     .hero-inner{
@@ -95,8 +103,8 @@
       display:flex; align-items:end; justify-content:center; text-align:center;
       padding:18px; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.3)
     }
-    .hero h1{margin:0; font-size:36px}
-    .hero p{margin:.35em 0 0}
+    .hero h1{margin:0; font-size:36px}   /* TODO[横幅主标题文本]：HTML 里改 */
+    .hero p{margin:.35em 0 0}           /* TODO[横幅副标题文本]：HTML 里改 */
 
     /* ========= 头像名片（白底扁平） ========= */
     .profile{
@@ -108,12 +116,15 @@
       display:grid; gap:16px; grid-template-columns: 96px 1fr;
     }
     .avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid #fff; box-shadow:0 6px 16px rgba(0,0,0,.12)}
+    /* TODO[头像]：在 HTML 里把 src="/images/avatar.jpg" 改为你的头像路径；尺寸会自动裁圆 */
 
     /* ========= 主内容：扁平分节 ========= */
     main{flex:1; max-width:980px; padding:24px 28px 60px; margin:0 auto}
     section{padding:18px 0; border-bottom:1px solid var(--border)}
     section:last-of-type{border-bottom:none}
     h2{margin:0 0 12px; font-size:20px}
+
+    /* TODO[标签样式]：可删掉 chips 整段或增删标签 */
     .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
     .chip{border:1px solid var(--border); color:var(--muted); padding:6px 10px; border-radius:999px; font-size:12px; background:#fff}
 
@@ -121,24 +132,22 @@
     .research .item{margin:18px 0; border-bottom:1px dashed var(--border); padding-bottom:16px}
     .research .item:last-child{border-bottom:none}
     .research .thumb{width:100%; height:auto; border:1px solid var(--border); border-radius:10px; background:#fff; box-shadow:var(--shadow)}
-    .research .title{margin:10px 0 6px; font-weight:700}
-    .research .desc{color:var(--text); line-height:1.8}
-    .research .meta{color:var(--muted); font-size:14px; margin-top:6px}
+    /* TODO[研究配图]：HTML 里每个 <img class="thumb" src="..."> 改路径即可 */
+    .research .title{margin:10px 0 6px; font-weight:700} /* TODO[研究标题]：HTML 改 */
+    .research .desc{color:var(--text); line-height:1.8}  /* TODO[研究描述]：HTML 改，可写多段 */
+    .research .meta{color:var(--muted); font-size:14px; margin-top:6px} /* TODO[研究方法/关键词]：HTML 改 */
 
-    /* ========= Publications（全部展开，按年份分组，无折叠/无点击） ========= */
-    .years{display:flex; flex-direction:column; gap:18px}
-    .year-block{padding:8px 0; border-top:1px solid var(--border)}
-    .year-block:first-child{border-top:none}
-    .year-title{font-weight:800; margin:0 0 8px; font-size:18px}
+    /* ========= Publications（编号列表，从新到旧） ========= */
     .pubs{list-style:decimal; padding-left:22px; margin:0}
     .pubs li{margin:8px 0}
     .pubs i{font-style:italic}
+    /* TODO[发表条目样式]：字号/间距在这里调；需要更紧凑可把 margin:8px 改小 */
 
     /* ========= 移动端 ========= */
     .topbar{display:none}
     @media (max-width:980px){
       .wrap{display:block}
-      .sidenav{position:relative; height:auto; width:auto; border-right:none}
+      .sidenav{position:relative; height:auto; width:auto; border-right:none} /* TODO[移动端去边线]：如需保留边线删掉这行 */
       nav ul{flex-direction:row; flex-wrap:wrap}
       .side-foot{position:static; margin-top:8px}
       .profile{padding:0 16px}
@@ -156,10 +165,15 @@
       <div class="brand">
         <span class="dot"></span>
         <div>
+          <!-- TODO[姓名]：改成你的名字（可中英并列） -->
           <h1>Huan Song</h1>
+
+          <!-- TODO[一句话定位]：研究方向/职位 -->
           <p>Atmospheric Chemistry</p>
         </div>
       </div>
+
+      <!-- TODO[导航菜单]：根据需要增删/改锚点名称（对应下面各 section 的 id） -->
       <nav>
         <ul>
           <li><a class="active" href="#top">Top</a></li>
@@ -171,6 +185,8 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
+
+      <!-- TODO[左栏底部]：联系邮箱/版权年份（年份自动） -->
       <div class="side-foot">
         <div>songhuan@pku.edu.cn</div>
         <div>© <span id="year"></span> Huan Song</div>
@@ -183,6 +199,7 @@
       <header class="hero">
         <div class="hero-inner">
           <div>
+            <!-- TODO[横幅主标题/副标题]：改成你最想突出的研究主题/关键词 -->
             <h1>Atmospheric Multiphase Chemistry</h1>
             <p>HOx radicals · Aerosol aging · Aqueous & heterogeneous processes</p>
           </div>
@@ -192,15 +209,23 @@
       <!-- 头像名片 -->
       <div class="profile">
         <div class="profile-card">
+          <!-- TODO[头像路径]：替换为你的头像路径；支持相对路径或完整 URL -->
           <img class="avatar" src="/images/avatar.jpg" alt="Huan Song portrait" />
           <div>
+            <!-- TODO[名片标题]：可放中英文名 -->
             <h2>Huan Song 宋欢</h2>
+
+            <!-- TODO[单位/职位] -->
             <div class="muted">Peking University · College of Environmental Sciences & Engineering</div>
+
+            <!-- TODO[研究标签]：自由增删 -->
             <div class="chips" style="margin-top:8px">
               <span class="chip">HOx / H₂O₂ budgets</span>
               <span class="chip">Multiphase modeling</span>
               <span class="chip">Lab kinetics · Field obs</span>
             </div>
+
+            <!-- TODO[按钮链接]：CV 锚点/邮箱链接可改为外链 PDF 或其它联系方式 -->
             <p style="margin:10px 0 0">
               <a href="#cv" class="chip" style="border-color:#D1D5DB">CV (PDF)</a>
               <a href="mailto:songhuan@pku.edu.cn" class="chip">Contact</a>
@@ -212,7 +237,10 @@
       <main>
         <!-- About -->
         <section id="about">
+          <!-- TODO[区块标题] -->
           <h2>About</h2>
+
+          <!-- TODO[自我介绍]：建议 3–6 句，覆盖研究方向/方法/意义/应用或合作意向 -->
           <p>
             I study multiphase atmospheric chemistry with a focus on aqueous and heterogeneous oxidation pathways
             controlling HOx and peroxide budgets. My work bridges laboratory kinetic experiments, 0-D modeling, and
@@ -224,19 +252,19 @@
         <section id="research" class="research">
           <h2>Research</h2>
 
-          <!-- 项目 1（示例） -->
+          <!-- TODO[研究项目#1]：复制本 <article> 作为模板，替换图片/标题/描述/方法关键词 -->
           <article class="item">
-            <img class="thumb" src="/images/research1.jpg" alt="HOx multiphase model">
-            <h3 class="title">HOx budgets in multiphase systems</h3>
-            <div class="desc">
+            <img class="thumb" src="/images/research1.jpg" alt="HOx multiphase model"> <!-- TODO[图1路径/alt] -->
+            <h3 class="title">HOx budgets in multiphase systems</h3>                  <!-- TODO[标题] -->
+            <div class="desc">                                                        <!-- TODO[描述]：可写多段 -->
               Using the PKU-MARK kinetic framework, we quantify HO₂ uptake and condensed-phase peroxide production
               across aerosol and cloud-relevant regimes. The parameterization aligns with recommended IUPAC kinetics
               and is evaluated against chamber/flow-tube constraints.
             </div>
-            <div class="meta">Methods: box/0-D modeling · uptake parameterization · sensitivity analysis</div>
+            <div class="meta">Methods: box/0-D modeling · uptake parameterization · sensitivity analysis</div> <!-- TODO[关键词] -->
           </article>
 
-          <!-- 项目 2（示例） -->
+          <!-- TODO[研究项目#2] -->
           <article class="item">
             <img class="thumb" src="/images/research2.jpg" alt="ESR radicals detection">
             <h3 class="title">Radicals detection by ESR and LIF</h3>
@@ -248,7 +276,7 @@
             <div class="meta">Methods: ESR · LIF · flow tube · metal-catalyzed reactions</div>
           </article>
 
-          <!-- 项目 3（示例） -->
+          <!-- TODO[研究项目#3] -->
           <article class="item">
             <img class="thumb" src="/images/research3.jpg" alt="Field campaign">
             <h3 class="title">Observation–model integration</h3>
@@ -259,81 +287,84 @@
             <div class="meta">Methods: field observations · constrained box models · radical budgets</div>
           </article>
 
-          <!-- 需要更多研究项目：复制上面 <article class="item">…</article>，替换图片与文本 -->
+          <!-- 提示：继续添加更多研究项目 => 复制 <article class="item"> 块 -->
         </section>
 
-        <!-- Publications（编号列表；从新到旧；自动倒序编号） -->
-<section id="pubs">
-  <h2>Publications</h2>
-  <ol class="pubs" reversed>
-    <!-- 2024 -->
-    <li>
-      <b>Song, H.</b>, Lu, K., Dong, H., Tan, Z., Chen, Z., Zeng, L., Zhang, Y. (2024).
-      Aerosol particle effects on atmospheric budgets of H₂O₂ and HOx — a multiphase model study.
-      <i>EGU24</i>. <!-- 可加 DOI / PDF 链接 -->
-    </li>
-    <li>
-      <b>Song, H.</b>, Chen, X., <i>Lu, K.D.</i>, et al. (2024).
-      Influence of aerosol copper on HO₂ uptake: parameterized equation and evaluation.
-      <i>Atmospheric Chemistry and Physics</i>. <!-- DOI: … -->
-    </li>
+        <!-- Publications（编号列表；从新到旧；自动倒序编号）
+             TODO[用法]：
+             1) 保持 <ol class="pubs" reversed> 不变，最新条目写在最前面；
+             2) 每条 <li> 内可以添加 DOI/PDF 链接（a 标签），也可加 * 通讯作者等标记；
+             3) 不用按年份分组，只保持从新到旧排列。 -->
+        <section id="pubs">
+          <h2>Publications</h2>
+          <ol class="pubs" reversed>
+            <!-- TODO[条目#1 最新]：替换作者/年份/题目/期刊；可添加 DOI/PDF 链接 -->
+            <li>
+              <b>Song, H.</b>, Lu, K., Dong, H., Tan, Z., Chen, Z., Zeng, L., Zhang, Y. (2024).
+              Aerosol particle effects on atmospheric budgets of H₂O₂ and HOx — a multiphase model study.
+              <i>EGU24</i>. <!-- 可加：<a href="https://doi.org/...">DOI</a> · <a href="/files/xxx.pdf">PDF</a> -->
+            </li>
 
-    <!-- 2023 -->
-    <li>
-      <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2023).
-      Impact of in-situ peroxide formation by metal complexes on H₂O₂ budgets.
-      <i>Science of the Total Environment</i>, submitted.
-    </li>
+            <li>
+              <b>Song, H.</b>, Chen, X., <i>Lu, K.D.</i>, et al. (2024).
+              Influence of aerosol copper on HO₂ uptake: parameterized equation and evaluation.
+              <i>Atmospheric Chemistry and Physics</i>.
+            </li>
 
-    <!-- 2022 -->
-    <li>
-      Ye, C., <i>Lu, K.D.</i>, <b>Song, H.</b>, Mu, Y., et al. (2022).
-      A critical review of sulfate aerosol formation during winter polluted periods.
-      <i>Journal of Environmental Sciences</i>. DOI: 10.1016/j.jes.2022.07.011
-    </li>
+            <li>
+              <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2023).
+              Impact of in-situ peroxide formation by metal complexes on H₂O₂ budgets.
+              <i>Science of the Total Environment</i>, submitted.
+            </li>
 
-    <!-- 2021 -->
-    <li>
-      <b>Song, H.</b>, <i>Lu, K.D.</i>, Ye, C., et al. (2021).
-      A comprehensive observational-based multiphase chemical model analysis of SO₂ oxidations in summer & winter.
-      <i>Atmospheric Chemistry and Physics</i>. DOI: 10.5194/acp-21-13713-2021
-    </li>
-    <li>
-      <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2021).
-      Reduced aerosol uptake of HO₂ may increase the sensitivity of O₃ production to VOCs.
-      <i>Environmental Science & Technology Letters</i>. DOI: 10.1021/acs.estlett.1c00893
-    </li>
+            <li>
+              Ye, C., <i>Lu, K.D.</i>, <b>Song, H.</b>, Mu, Y., et al. (2022).
+              A critical review of sulfate aerosol formation during winter polluted periods.
+              <i>Journal of Environmental Sciences</i>. DOI: 10.1016/j.jes.2022.07.011
+            </li>
 
-    <!-- 2020 / 2019 -->
-    <li>
-      <b>Song, H.</b>, Zou, Q., <i>Lu, K.D.</i> (2020).
-      Parameterization and application of HO₂ heterogeneous uptake coefficient.
-      <i>Progress in Chemistry</i>. DOI: 10.7536/PC200749
-    </li>
-    <li>
-      Zou, Q., <b>Song, H.</b>, Tang, M., <i>Lu, K.</i> (2019).
-      Measurements of HO₂ uptake coefficient on aqueous (NH₄)₂SO₄ aerosol using LIF flow tube.
-      <i>Chinese Chemical Letters</i>. DOI: 10.1016/j.cclet.2019.07.041
-    </li>
+            <li>
+              <b>Song, H.</b>, <i>Lu, K.D.</i>, Ye, C., et al. (2021).
+              A comprehensive observational-based multiphase chemical model analysis of SO₂ oxidations in summer & winter.
+              <i>Atmospheric Chemistry and Physics</i>. DOI: 10.5194/acp-21-13713-2021
+            </li>
 
-    <!-- 2016 -->
-    <li>
-      <b>Song, H.</b>, Zhang, G., Wang, H., et al. (2016).
-      Research progress on co-digestion of sludge and other substrates.
-      <i>Industrial Water and Wastewater</i>. DOI: 10.3969/j.issn.1009-2455.2016.04.001
-    </li>
-    <li>
-      Wang, Y., Zhang, G., Zhang, P., Yang, G., <b>Song, H.</b>, Yang, A. (2016).
-      Research progress in anaerobic fermentation of sludge for hydrogen production.
-      <i>Water Resources Protection</i>, 32(4), 109–116.
-    </li>
-  </ol>
-</section>
+            <li>
+              <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2021).
+              Reduced aerosol uptake of HO₂ may increase the sensitivity of O₃ production to VOCs.
+              <i>Environmental Science & Technology Letters</i>. DOI: 10.1021/acs.estlett.1c00893
+            </li>
 
+            <li>
+              <b>Song, H.</b>, Zou, Q., <i>Lu, K.D.</i> (2020).
+              Parameterization and application of HO₂ heterogeneous uptake coefficient.
+              <i>Progress in Chemistry</i>. DOI: 10.7536/PC200749
+            </li>
+
+            <li>
+              Zou, Q., <b>Song, H.</b>, Tang, M., <i>Lu, K.</i> (2019).
+              Measurements of HO₂ uptake coefficient on aqueous (NH₄)₂SO₄ aerosol using LIF flow tube.
+              <i>Chinese Chemical Letters</i>. DOI: 10.1016/j.cclet.2019.07.041
+            </li>
+
+            <li>
+              <b>Song, H.</b>, Zhang, G., Wang, H., et al. (2016).
+              Research progress on co-digestion of sludge and other substrates.
+              <i>Industrial Water and Wastewater</i>. DOI: 10.3969/j.issn.1009-2455.2016.04.001
+            </li>
+
+            <li>
+              Wang, Y., Zhang, G., Zhang, P., Yang, G., <b>Song, H.</b>, Yang, A. (2016).
+              Research progress in anaerobic fermentation of sludge for hydrogen production.
+              <i>Water Resources Protection</i>, 32(4), 109–116.
+            </li>
+          </ol>
+        </section>
 
         <!-- Talks -->
         <section id="talks">
           <h2>Talks</h2>
+          <!-- TODO[报告列表]：按需要增删；可加链接到 abstract/slides/video -->
           <ul style="padding-left:18px; margin:8px 0">
             <li>EGU 2024 — AS3.33 oral, Vienna.</li>
             <li>AGU 2019 — A11K poster, San Francisco.</li>
@@ -343,12 +374,14 @@
         <!-- CV -->
         <section id="cv">
           <h2>Curriculum Vitae</h2>
+          <!-- TODO[CV 文件]：把 href 改成你的 PDF 路径；也可外链 Google Drive 等 -->
           <p>Download: <a class="chip" href="/files/HuanSong_CV.pdf" target="_blank" rel="noreferrer">CV (PDF)</a></p>
         </section>
 
         <!-- Contact -->
         <section id="contact">
           <h2>Contact</h2>
+          <!-- TODO[联系方式]：邮箱/地址/学术主页/社交媒体（增删链接皆可） -->
           <p>Email: <a href="mailto:songhuan@pku.edu.cn">songhuan@pku.edu.cn</a></p>
           <p>College of Environmental Sciences & Engineering, Peking University</p>
           <p>
@@ -356,9 +389,10 @@
             <a href="https://orcid.org/" target="_blank" rel="noreferrer">ORCID</a> ·
             <a href="https://github.com/huansong-uw" target="_blank" rel="noreferrer">GitHub</a>
           </p>
-          <p class="muted">Last updated: <span id="lastUpdate"></span></p>
+          <p class="muted">Last updated: <span id="lastUpdate"></span></p> <!-- TODO[更新时间]：自动生成，无需手动改 -->
         </section>
 
+        <!-- 页脚 -->
         <section>
           <p class="muted">© <span id="year"></span> Huan Song · Built on GitHub Pages · <a href="#top">↑ Back to top</a></p>
         </section>
@@ -367,7 +401,7 @@
   </div>
 
   <script>
-    // 导航高亮（随滚动切换 active）
+    // TODO[导航高亮]：自动根据滚动高亮左侧菜单；不需要可删除整个脚本块
     const links=[...document.querySelectorAll('nav a')];
     const targets=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
     const io=new IntersectionObserver(es=>{
@@ -380,7 +414,7 @@
     },{rootMargin:"-40% 0px -55% 0px", threshold:0});
     targets.forEach(t=>io.observe(t));
 
-    // 年份与更新时间
+    // TODO[年份与更新时间]：自动写当前年份与今天日期到页面
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('lastUpdate').textContent = new Date().toISOString().slice(0,10);
   </script>
