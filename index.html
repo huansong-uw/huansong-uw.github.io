@@ -7,19 +7,19 @@
   <title>Huan Song | Atmospheric Chemistry</title>
   <meta name="description" content="Huan Song — atmospheric multiphase chemistry, HOx radicals, aerosol aging." />
 
-  <!-- 美式报刊/期刊风字体：正文 Source Serif 4；标题 Bodoni Moda；UI IBM Plex Sans -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..700&family=Bodoni+Moda:opsz,wght@6..96,500..800&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- 学术风字体：正文/标题 Spectral；UI Source Sans 3 -->
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     /* ========= 主题变量（配色 + 自适应排版） ========= */
     :root{
       /* 颜色 */
       --bg:      #EFF6FF;
-      --text:    #1F2937;
-      --muted:   #6B7280;
+      --text:    #1B2430;   /* 略深，配合衬线字更清晰 */
+      --muted:   #5B6675;
       --border:  #E5E7EB;
-      --brand:   #3B82F6;
-      --accent:  #06B6D4;
+      --brand:   #2F6DF6;   /* 学术蓝稍收敛 */
+      --accent:  #0CA6C8;
 
       --side-bg:     #0B1F3A;
       --side-border: #0B1F3A;
@@ -36,11 +36,11 @@
       --hero-overlay: rgba(0,0,0,.25);
 
       --font-size-base: clamp(18px, 0.9vw + 14px, 21px);
-      --line-height-base: 1.85;
+      --line-height-base: 1.9;
 
-      --font-h1: clamp(36px, 3.4vw + 12px, 58px);
-      --font-h2: clamp(22px, 1.2vw + 14px, 30px);
-      --font-h3: clamp(18px, 1.0vw + 12px, 24px);
+      --font-h1: clamp(36px, 3.2vw + 14px, 56px);
+      --font-h2: clamp(22px, 1.1vw + 16px, 32px);
+      --font-h3: clamp(18px, 0.9vw + 14px, 24px);
 
       --chip-size: clamp(12px, 0.25vw + 11px, 14px);
       --nav-pad-v: clamp(8px, 0.5vw + 6px, 12px);
@@ -51,21 +51,22 @@
       --content-pad: clamp(16px, 1.8vw, 28px);
     }
 
-    /* ========= 基础排版（期刊风） ========= */
+    /* ========= 基础排版（更学术：Spectral 全站） ========= */
     html{scroll-behavior:smooth}
     body{
       margin:0; background:var(--bg); color:var(--text);
-      font: var(--font-size-base)/var(--line-height-base) "Source Serif 4", Georgia, "Times New Roman", Times, serif;
+      font: var(--font-size-base)/var(--line-height-base) "Spectral", Georgia, "Times New Roman", Times, serif;
       -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-      font-kerning: normal; font-feature-settings: "liga" 1, "kern" 1, "onum" 1;
+      font-kerning: normal; font-feature-settings: "liga" 1, "kern" 1;
     }
     h1,h2,h3{
-      font-family: "Bodoni Moda", "Libre Baskerville", "Times New Roman", Times, serif;
-      font-weight:600; letter-spacing:.2px; line-height:1.25;
+      font-family: "Spectral", Georgia, "Times New Roman", Times, serif;
+      font-weight:600; letter-spacing:.1px; line-height:1.25;
     }
     h1{ font-size:var(--font-h1); }
     h2{ font-size:var(--font-h2); }
     h3{ font-size:var(--font-h3); }
+
     a{color:var(--brand); text-decoration:none}
     a:hover{text-decoration:underline}
     img{max-width:100%; height:auto; display:block}
@@ -79,11 +80,11 @@
       padding:22px; box-sizing:border-box;
       border-right:1px solid var(--side-border);
       background: var(--side-bg);
-      font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
     .brand{display:flex; gap:12px; align-items:center; margin-bottom:12px}
     .dot{width:12px;height:12px;border-radius:50%; background:#22D3EE; box-shadow:0 0 14px rgba(34,211,238,.6)}
-    .brand h1{margin:0; font-size:clamp(20px, 1.2vw + 14px, 26px); line-height:1.2; color:#fff; font-family:"IBM Plex Sans",system-ui,sans-serif}
+    .brand h1{margin:0; font-size:clamp(20px, 1.2vw + 14px, 26px); line-height:1.2; color:#fff; font-family:"Source Sans 3",system-ui,sans-serif}
     .brand p{margin:6px 0 0; font-size:clamp(12px, 0.5vw + 10px, 14px); color:var(--side-muted)}
 
     nav ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
@@ -119,7 +120,11 @@
       display:flex; align-items:end; justify-content:center; text-align:center;
       padding:18px; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.3)
     }
-    .hero p{margin:.35em 0 0; font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:clamp(14px, 0.7vw + 12px, 18px)}
+    .hero p{
+      margin:.35em 0 0; 
+      font-family:"Source Sans 3",system-ui,sans-serif; 
+      font-size:clamp(14px, 0.7vw + 12px, 18px)
+    }
 
     /* ========= 头像名片 ========= */
     .profile{ position:relative; margin:-48px auto 0; max-width:var(--content-max); padding:0 var(--content-pad); z-index:2; }
@@ -127,7 +132,7 @@
       background:#fff; color:var(--text); border:1px solid var(--border);
       border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(16px, 1.2vw, 22px);
       display:grid; gap:16px; grid-template-columns: clamp(84px, 8vw, 110px) 1fr;
-      font-family:"IBM Plex Sans",system-ui,sans-serif;
+      font-family:"Source Sans 3",system-ui,sans-serif;
     }
     .avatar{
       width: clamp(84px, 8vw, 110px); height: clamp(84px, 8vw, 110px);
@@ -138,7 +143,7 @@
       border:1px solid var(--border); color:var(--muted);
       padding: clamp(5px, 0.4vw, 7px) clamp(8px, 0.7vw, 12px);
       border-radius:999px; font-size:var(--chip-size); background:#fff;
-      font-family:"IBM Plex Sans",system-ui,sans-serif;
+      font-family:"Source Sans 3",system-ui,sans-serif;
     }
 
     /* ========= 主内容 ========= */
@@ -150,9 +155,9 @@
     .research .item{margin: clamp(16px, 1.2vw, 22px) 0; border-bottom:1px dashed var(--border); padding-bottom: clamp(14px, 1vw, 18px)}
     .research .item:last-child{border-bottom:none}
     .research .thumb{width:100%; height:auto; border:1px solid var(--border); border-radius:10px; background:#fff; box-shadow:var(--shadow)}
-    .research .title{margin:10px 0 6px; font-weight:800}
+    .research .title{margin:10px 0 6px; font-weight:700}
     .research .desc{color:var(--text); line-height:1.9; font-size: clamp(16px, 0.6vw + 14px, 20px)}
-    .research .meta{color:var(--muted); font-size: clamp(13px, 0.4vw + 11px, 15px); margin-top:6px; font-family:"IBM Plex Sans",system-ui,sans-serif;}
+    .research .meta{color:var(--muted); font-size: clamp(13px, 0.4vw + 11px, 15px); margin-top:6px; font-family:"Source Sans 3",system-ui,sans-serif;}
 
     /* ========= Publications：编号从新到旧 ========= */
     .pubs{list-style:decimal; padding-left: clamp(20px, 1.2vw, 26px); margin:0}
@@ -342,7 +347,7 @@
         <!-- Talks -->
         <section id="talks">
           <h2>Talks</h2>
-          <ul style="padding-left:22px; margin:8px 0; font-family:'IBM Plex Sans',system-ui,sans-serif">
+          <ul style="padding-left:22px; margin:8px 0; font-family:'Source Sans 3',system-ui,sans-serif">
             <li>EGU 2024 — AS3.33 oral, Vienna.</li>
             <li>AGU 2019 — A11K poster, San Francisco.</li>
           </ul>
@@ -351,7 +356,7 @@
         <!-- CV -->
         <section id="cv">
           <h2>Curriculum Vitae</h2>
-          <p style="font-family:'IBM Plex Sans',system-ui,sans-serif">
+          <p style="font-family:'Source Sans 3',system-ui,sans-serif">
             Download: <a class="chip" href="/files/HuanSong_CV.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
           </p>
         </section>
@@ -361,16 +366,16 @@
           <h2>Contact</h2>
           <p>Email: <a href="mailto:songhuan@pku.edu.cn">songhuan@pku.edu.cn</a></p>
           <p>College of Environmental Sciences & Engineering, Peking University</p>
-          <p style="font-family:'IBM Plex Sans',system-ui,sans-serif">
+          <p style="font-family:'Source Sans 3',system-ui,sans-serif">
             <a href="https://scholar.google.com/" target="_blank" rel="noreferrer">Google Scholar</a> ·
             <a href="https://orcid.org/" target="_blank" rel="noreferrer">ORCID</a> ·
             <a href="https://github.com/huansong-uw" target="_blank" rel="noreferrer">GitHub</a>
           </p>
-          <p class="muted" style="font-family:'IBM Plex Sans',system-ui,sans-serif">Last updated: <span id="lastUpdate"></span></p>
+          <p class="muted" style="font-family:'Source Sans 3',system-ui,sans-serif">Last updated: <span id="lastUpdate"></span></p>
         </section>
 
         <section>
-          <p class="muted" style="font-family:'IBM Plex Sans',system-ui,sans-serif">© <span id="year"></span> Huan Song · Built on GitHub Pages · <a href="#top">↑ Back to top</a></p>
+          <p class="muted" style="font-family:'Source Sans 3',system-ui,sans-serif">© <span id="year"></span> Huan Song · Built on GitHub Pages · <a href="#top">↑ Back to top</a></p>
         </section>
       </main>
     </div>
