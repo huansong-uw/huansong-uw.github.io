@@ -6,15 +6,14 @@
   <title>Huan Song | Atmospheric Chemistry</title>
   <meta name="description" content="Huan Song — atmospheric multiphase chemistry, HOx radicals, aerosol aging." />
 
-  <!-- 可选字体（无衬线 Inter / 衬线 Noto Serif），需要就保留 -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Serif:wght@400;600;700&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
+  <!-- 可选字体（想换字体就改这一行；不用就删掉，走系统默认） -->
+  <!-- TODO[字体]：把 family= 后的字体改成你喜欢的，比如 Inter / Noto Serif / Source Sans 之类 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
 
   <style>
-    /* ========= 主题变量：浅黄背景 + 深色文字，像示例站那样扁平 ========= */
+    /* ========= 主题变量：浅黄背景 + 深色文字（无 panel 扁平风） ========= */
     :root{
-      --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
-      --font-serif: "Noto Serif", Georgia, "Times New Roman", serif;
-
+      /* TODO[配色]：全站主色在这改。浅黄背景、深色文字；想换主色，改 --brand / --accent 即可 */
       --bg:      #FFF9E9;  /* 页面整体浅黄背景 */
       --text:    #1F2937;  /* 主文字 深灰蓝 */
       --muted:   #6B7280;  /* 次要文字 */
@@ -22,30 +21,29 @@
       --brand:   #4F46E5;  /* 链接主色（indigo） */
       --accent:  #06B6D4;  /* 强调（cyan） */
 
+      /* TODO[尺寸]：圆角/阴影/横幅高度想调就改这里 */
       --radius:  14px;
       --shadow:  0 6px 18px rgba(0,0,0,.06);
-
       --hero-height: 44vh;             /* 顶部横幅高度 */
       --hero-overlay: rgba(0,0,0,.25); /* 横幅遮罩强度 */
     }
 
-    html{scroll-behavior:smooth}
+    /* TODO[字体]：全站正文字体，想改就把 Inter 换成你喜欢的 */
     body{
       margin:0; background:var(--bg); color:var(--text);
-      font:16px/1.75 var(--font-sans);
+      font:16px/1.75 "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
     }
+    html{scroll-behavior:smooth}
     a{color:var(--brand); text-decoration:none}
     a:hover{text-decoration:underline}
     img{max-width:100%; height:auto; display:block}
     .muted{color:var(--muted)}
-
     .wrap{display:flex; min-height:100vh}
 
     /* 侧边导航（无 panel，轻描边&浅投影） */
     .sidenav{
       width:260px; flex:0 0 260px; position:sticky; top:0; height:100vh;
-      padding:22px; box-sizing:border-box;
-      border-right:1px solid var(--border);
+      padding:22px; box-sizing:border-box; border-right:1px solid var(--border);
       background: linear-gradient(180deg, rgba(79,70,229,.06), transparent 40%), var(--bg);
     }
     .brand{display:flex; gap:12px; align-items:center; margin-bottom:12px}
@@ -69,10 +67,11 @@
       border-bottom:1px solid var(--border);
     }
     .hero::before{
+      /* TODO[横幅图]：把 /images/hero.jpg 换成你的横幅大图路径（宽屏风景/引入图最佳） */
       content:""; position:absolute; inset:0;
       background:
         linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.25)),
-        url('/images/hero.jpg') center/cover no-repeat; /* ← 上传 /images/hero.jpg */
+        url('/images/hero.jpg') center/cover no-repeat;
       filter:saturate(1.05) brightness(0.95);
       z-index:0;
     }
@@ -84,7 +83,7 @@
     .hero h1{margin:0; font-size:36px}
     .hero p{margin:.35em 0 0}
 
-    /* 头像名片（扁平风，白底、轻阴影） */
+    /* 头像名片（白底扁平卡、轻投影） */
     .profile{
       position:relative; margin:-48px auto 0; max-width:980px; padding:0 28px; z-index:2;
     }
@@ -106,13 +105,18 @@
     /* Research：两种模式——图墙 gallery（浅色卡片）/ 纯列表 list */
     .research.gallery .items{display:grid; gap:14px}
     @media (min-width:900px){ .research.gallery .items{grid-template-columns:repeat(3,1fr)} }
-    .card{
-      background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:var(--shadow);
-    }
+    .card{background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:var(--shadow)}
     .card img{width:100%; height:160px; object-fit:cover}
     .card .meta{padding:10px 12px; font-size:14px; color:var(--text)}
     .research.list ul{padding-left:18px; margin:8px 0}
     .research.list li{margin:6px 0}
+
+    /* Publications：年份折叠（details/summary），方便放“全部”且可展开/折叠 */
+    details{border:1px solid var(--border); border-radius:10px; background:#fff; box-shadow:var(--shadow); margin:10px 0}
+    summary{cursor:pointer; padding:10px 12px; font-weight:600; list-style:none}
+    summary::-webkit-details-marker{display:none}
+    .publist{padding:0 16px 10px 28px}
+    .publist li{margin:8px 0}
 
     /* 顶部简易导航（移动端） */
     .topbar{display:none}
@@ -131,13 +135,14 @@
 
 <body>
   <div class="wrap">
-    <!-- 侧边导航 -->
+    <!-- ===== 左侧导航栏 =====
+         TODO[姓名/头衔/邮箱]：改 h1 / p / 底部邮箱；想加/减菜单项就改 <nav> 里的 <li> -->
     <aside class="sidenav">
       <div class="brand">
         <span class="dot"></span>
         <div>
-          <h1>Huan Song</h1>
-          <p>Atmospheric Chemistry</p>
+          <h1>Huan Song</h1>            <!-- ← 你的姓名 -->
+          <p>Atmospheric Chemistry</p>  <!-- ← 你的头衔/研究方向一句话 -->
         </div>
       </div>
       <nav>
@@ -152,44 +157,49 @@
         </ul>
       </nav>
       <div class="side-foot">
-        <div>songhuan@pku.edu.cn</div>
+        <div>songhuan@pku.edu.cn</div>  <!-- ← 你的邮箱 -->
         <div>© <span id="year"></span> Huan Song</div>
       </div>
     </aside>
 
     <!-- 主列：横幅 + 头像 + 内容 -->
     <div style="flex:1">
-      <!-- 顶部横幅（风景/引入图） -->
+      <!-- ===== 顶部横幅（风景/引入图） =====
+           TODO[横幅图]：把 /images/hero.jpg 换成你的横幅大图路径 -->
       <header class="hero">
         <div class="hero-inner">
           <div>
-            <h1>Atmospheric Multiphase Chemistry</h1>
-            <p>HOx radicals · Aerosol aging · Aqueous & heterogeneous processes</p>
+            <h1>Atmospheric Multiphase Chemistry</h1> <!-- ← 横幅标题 -->
+            <p>HOx radicals · Aerosol aging · Aqueous & heterogeneous processes</p> <!-- ← 横幅副标题 -->
           </div>
         </div>
       </header>
 
-      <!-- 头像名片（白底扁平卡、轻投影） -->
+      <!-- ===== 头像名片（白底扁平卡） =====
+           TODO[头像]：把 /images/avatar.jpg 换成你的照片路径 -->
       <div class="profile">
         <div class="profile-card">
-          <img class="avatar" src="/images/avatar.jpg" alt="Huan Song portrait" /> <!-- 上传 /images/avatar.jpg -->
+          <img class="avatar" src="/images/avatar.jpg" alt="Huan Song portrait" />
           <div>
-            <h2>Huan Song 宋欢</h2>
-            <div class="muted">Peking University · College of Environmental Sciences & Engineering</div>
+            <h2>Huan Song 宋欢</h2> <!-- ← 名片标题（可写中文名+英文名） -->
+            <div class="muted">Peking University · College of Environmental Sciences & Engineering</div> <!-- ← 单位 -->
             <div class="chips" style="margin-top:8px">
+              <!-- TODO[研究标签]：按需增删 -->
               <span class="chip">HOx / H₂O₂ budgets</span>
               <span class="chip">Multiphase modeling</span>
               <span class="chip">Lab kinetics · Field obs</span>
             </div>
             <p style="margin:10px 0 0">
-              <a href="#cv" class="chip" style="border-color:#D1D5DB">CV (PDF)</a>
-              <a href="mailto:songhuan@pku.edu.cn" class="chip">Contact</a>
+              <a href="#cv" class="chip" style="border-color:#D1D5DB">CV (PDF)</a> <!-- TODO[CV]：下方 CV 段落设置实际链接 -->
+              <a href="mailto:songhuan@pku.edu.cn" class="chip">Contact</a>         <!-- TODO[邮箱]：改成你的邮箱 -->
             </p>
           </div>
         </div>
       </div>
 
       <main>
+        <!-- ===== About =====
+             TODO[About]：写 3–6 句你做什么、怎么做、为何重要 -->
         <section id="about">
           <h2>About</h2>
           <p>
@@ -199,7 +209,11 @@
           </p>
         </section>
 
-        <!-- Research：把 class 改为 "research list" 可切换为纯文本列表 -->
+        <!-- ===== Research =====
+             * “图墙模式”：section class="research gallery" + 下面 .items 三张（或更多）卡片
+             * “纯列表模式”：把 class 改成 research list，并用注释里的 <ul> 替换 .items
+             TODO[研究图]：把 /images/research*.jpg 换成你的图；不想用图，就用下面的列表模板
+        -->
         <section id="research" class="research gallery">
           <h2>Research</h2>
           <div class="items">
@@ -217,7 +231,7 @@
             </article>
           </div>
 
-          <!-- 纯文本模式示例（用它替换上面的 .items 并把 section 类改为 research list）
+          <!-- 纯文本模式（把上面的 .items 删掉，然后把本注释下方的 <ul> 取消注释，同时把 section 类改为 research list）
           <ul>
             <li>HOx budgets in multiphase systems — parameterizing HO₂ uptake.</li>
             <li>Radicals detection by ESR; LIF measurement & flow-tube experiments.</li>
@@ -226,35 +240,124 @@
           -->
         </section>
 
+        <!-- ===== Publications（全部发表 All Publications）=====
+             结构说明：
+             - 按“年份”分组，用 <details> 折叠；summary 里写年份与当年条目数
+             - 每条格式建议：作者（加粗你自己名字或*通讯/报告人*标记）+ 年份 + 题目 + 期刊/会议 + 链接
+             - 可选字段：DOI 链接、PDF（仓库 /files 下）、BibTeX（仓库 /files 下）
+             - 想新增年份：复制一个 <details> 块改成新年份，条目按倒序排
+             TODO[发表]：把示例条目全部替换成你的“全部发表”，需要多少就放多少
+        -->
         <section id="pubs">
-          <h2>Selected Publications</h2>
-          <ul style="padding-left:18px; margin:8px 0">
-            <li>
-              <b>Song, H.</b>, Lu, K., Dong, H., Tan, Z., Chen, Z., Zeng, L., Zhang, Y. (2024).
-              Aerosol particle effects on atmospheric budgets of H₂O₂ and HOx — a multiphase model study.
-              <i>EGU24</i>. <a href="#">abs</a> · <a href="#">slides</a>
-            </li>
-            <li>
-              <b>Song, H.</b>, Zou, Q., Lu, K. (2019). Lab experiments on HO₂ uptake interpreted by a kinetic model.
-              <i>AGU Fall Meeting Abstracts</i>. <a href="#">abs</a>
-            </li>
-          </ul>
-          <p class="muted">(* presenting/corresponding author)</p>
+          <h2>Publications (All)</h2>
+
+          <!-- === 2024 示例 === -->
+          <details open>
+            <summary>2024 &nbsp; <span class="muted">(2)</span></summary> <!-- TODO[数量]：改为当年条目总数 -->
+            <ul class="publist">
+              <li>
+                <b>Song, H.</b>, Lu, K., Dong, H., Tan, Z., Chen, Z., Zeng, L., Zhang, Y. (2024).
+                Aerosol particle effects on atmospheric budgets of H₂O₂ and HOx — a multiphase model study.
+                <i>EGU24</i>.
+                <!-- TODO[链接]：把 # 替换为真实链接；有 PDF 就把文件放 /files 下 -->
+                <a href="#" target="_blank" rel="noreferrer">abstract</a> ·
+                <a href="#" target="_blank" rel="noreferrer">slides</a> ·
+                <a href="/files/2024_song_hox.pdf" target="_blank" rel="noreferrer">PDF</a> <!-- 可选 -->
+              </li>
+              <li>
+                <b>Song, H.</b>, Chen, X., <i>Lu, K.D.</i>, et al. (2024).
+                Influence of aerosol copper on HO₂ uptake: parameterized equation and evaluation.
+                <i>Atmospheric Chemistry and Physics</i>.
+                <a href="https://doi.org/10.xxxx/xxxxx" target="_blank" rel="noreferrer">DOI</a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- === 2023 示例 === -->
+          <details>
+            <summary>2023 &nbsp; <span class="muted">(1)</span></summary>
+            <ul class="publist">
+              <li>
+                <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2023).
+                Impact of in-situ peroxide formation by metal complexes on H₂O₂ budgets.
+                <i>Science of the Total Environment</i>, submitted.
+              </li>
+            </ul>
+          </details>
+
+          <!-- === 2022 示例 === -->
+          <details>
+            <summary>2022 &nbsp; <span class="muted">(1)</span></summary>
+            <ul class="publist">
+              <li>
+                Ye, C., <i>Lu, K.D.</i>, <b>Song, H.</b>, Mu, Y., et al. (2022).
+                Review of sulfate aerosol formation during winter pollution.
+                <i>Journal of Environmental Sciences</i>.
+                <a href="https://doi.org/10.1016/j.jes.2022.07.011" target="_blank" rel="noreferrer">DOI</a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- === 2021 示例 === -->
+          <details>
+            <summary>2021 &nbsp; <span class="muted">(2)</span></summary>
+            <ul class="publist">
+              <li>
+                <b>Song, H.</b>, <i>Lu, K.D.</i>, Ye, C., et al. (2021).
+                Multiphase model analysis of SO₂ oxidations in summer & winter.
+                <i>Atmospheric Chemistry and Physics</i>.
+                <a href="https://doi.org/10.5194/acp-21-13713-2021" target="_blank" rel="noreferrer">DOI</a>
+              </li>
+              <li>
+                <b>Song, H.</b>, <i>Lu, K.D.</i>, Dong, H.B., et al. (2021).
+                Reduced aerosol uptake of HO₂ may increase O₃ sensitivity to VOCs.
+                <i>Environmental Science & Technology Letters</i>.
+                <a href="https://doi.org/10.1021/acs.estlett.1c00893" target="_blank" rel="noreferrer">DOI</a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- === 2020 示例 === -->
+          <details>
+            <summary>2020 &nbsp; <span class="muted">(2)</span></summary>
+            <ul class="publist">
+              <li>
+                <b>Song, H.</b>, Zou, Q., <i>Lu, K.D.</i> (2020).
+                Parameterization and application of HO₂ heterogeneous uptake coefficient.
+                <i>Progress in Chemistry</i>.
+                <a href="https://doi.org/10.7536/PC200749" target="_blank" rel="noreferrer">DOI</a>
+              </li>
+              <li>
+                Zou, Q., <b>Song, H.</b>, Tang, M., <i>Lu, K.</i> (2019/2020).
+                HO₂ uptake on aqueous (NH₄)₂SO₄ aerosol with LIF flow tube.
+                <i>Chinese Chemical Letters</i>.
+                <a href="https://doi.org/10.1016/j.cclet.2019.07.041" target="_blank" rel="noreferrer">DOI</a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- TODO[新增年份]：复制上方 <details> 块，改 summary 年份与 (数量)，把条目粘进去 -->
         </section>
 
+        <!-- ===== Talks =====
+             TODO[报告]：把你的口头/墙报按年份或会议分类；可加 slides/abstract 链接 -->
         <section id="talks">
           <h2>Talks</h2>
           <ul style="padding-left:18px; margin:8px 0">
-            <li>EGU 2024 — AS3.33 oral, Vienna. <a href="#">abstract</a></li>
-            <li>AGU 2019 — A11K poster, San Francisco. <a href="#">abstract</a></li>
+            <li>EGU 2024 — AS3.33 oral, Vienna. <a href="#" target="_blank" rel="noreferrer">abstract</a></li>
+            <li>AGU 2019 — A11K poster, San Francisco. <a href="#" target="_blank" rel="noreferrer">abstract</a></li>
           </ul>
         </section>
 
+        <!-- ===== CV =====
+             TODO[CV]：把简历 PDF 放到 /files/HuanSong_CV.pdf 或改成你的文件名 -->
         <section id="cv">
           <h2>Curriculum Vitae</h2>
-          <p>Download: <a class="chip" href="/files/HuanSong_CV.pdf">CV (PDF)</a> <!-- 上传 /files/HuanSong_CV.pdf --></p>
+          <p>Download: <a class="chip" href="/files/HuanSong_CV.pdf" target="_blank" rel="noreferrer">CV (PDF)</a></p>
         </section>
 
+        <!-- ===== Contact =====
+             TODO[链接]：替换成你的学术主页/ORCID/GitHub 等链接 -->
         <section id="contact">
           <h2>Contact</h2>
           <p>Email: <a href="mailto:songhuan@pku.edu.cn">songhuan@pku.edu.cn</a></p>
@@ -275,7 +378,7 @@
   </div>
 
   <script>
-    // 导航高亮
+    // 导航高亮（点击后随滚动高亮对应菜单）
     const links=[...document.querySelectorAll('nav a')];
     const targets=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
     const io=new IntersectionObserver(es=>{
@@ -288,7 +391,7 @@
     },{rootMargin:"-40% 0px -55% 0px", threshold:0});
     targets.forEach(t=>io.observe(t));
 
-    // 年份与更新时间
+    // 年份与更新时间（自动）
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('lastUpdate').textContent = new Date().toISOString().slice(0,10);
   </script>
