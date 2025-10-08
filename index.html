@@ -6,136 +6,148 @@
   <title>Huan Song | Atmospheric Chemistry</title>
   <meta name="description" content="Huan Song — atmospheric multiphase chemistry, HOx radicals, aerosol aging." />
 
+  <!-- 可切换字体：示例引入 Inter（无衬线）和 Noto Serif（衬线），按需保留其一 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Serif:wght@400;600;700&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
+
   <style>
-    /* ===== Global tokens ===== */
-    :root{ --radius:16px; --shadow:0 10px 24px rgba(0,0,0,.06) }
+    /* ====== 全局变量（你只改这里就能换字体/配色/圆角等） ====== */
+    :root{
+      --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+      --font-serif: "Noto Serif", Georgia, "Times New Roman", serif;
+      --use-serif-headings: 0;  /* 1 = 标题用衬线体，0 = 用无衬线体 */
 
-    /* ===== Themes ===== */
-    /* SKY（默认）：indigo + cyan，清爽科技感 */
-    .theme-sky{
-      --bg:#f9fafb; --panel:#ffffff; --text:#111827; --muted:#6b7280; --border:#e5e7eb;
-      --brand:#4f46e5; --accent:#06b6d4; --chip:#eff6ff;
-    }
-    /* MINT：emerald + teal，温柔自然 */
-    .theme-mint{
-      --bg:#f6fbf7; --panel:#ffffff; --text:#0b1f17; --muted:#5b6b64; --border:#e6f0ea;
-      --brand:#059669; --accent:#14b8a6; --chip:#ecfdf5;
-    }
-    /* SAND：amber + cocoa，奶油治愈 */
-    .theme-sand{
-      --bg:#fffcf6; --panel:#ffffff; --text:#1a140a; --muted:#7a6f62; --border:#f0e7d8;
-      --brand:#f59e0b; --accent:#a16207; --chip:#fff7ed;
+      --radius: 16px;
+      --shadow: 0 10px 24px rgba(0,0,0,.18);
+
+      /* 配色：背景浅黄色；面板深灰；文字浅色；强调色蓝青 */
+      --bg: #FFF9E9;        /* 页面整体背景（浅浅的黄色） */
+      --panel: #1A1F27;     /* 内容卡片深灰色 */
+      --text: #EAEFF5;      /* 卡片内主文字（浅色） */
+      --muted: #A9B2BD;     /* 次要文字 */
+      --border: #2A313C;    /* 边框 */
+      --brand: #4F8DF7;     /* 主色（链接/按钮） */
+      --accent: #18C3A1;    /* 强调色（小点/高亮） */
+
+      /* 顶部横幅遮罩与高度 */
+      --hero-height: 44vh;  /* 调整横幅高度 */
+      --hero-overlay: rgba(0,0,0,.25);
     }
 
-    /* ===== Base ===== */
-    html{scroll-behavior:smooth;}
+    /* 基础排版 */
+    html{scroll-behavior:smooth}
     body{
-      margin:0; background:var(--bg); color:var(--text);
-      font:16px/1.7 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+      margin:0; background:var(--bg); color:#111;
+      font:16px/1.7 var(--font-sans);
     }
+    body.serif-headings h1, body.serif-headings h2, body.serif-headings h3 { font-family: var(--font-serif); }
     a{color:var(--brand); text-decoration:none}
     a:hover{text-decoration:underline}
-    img{max-width:100%; height:auto; border-radius:14px}
-    .muted{color:var(--muted)}
-    .wrap{display:flex; min-height:100vh}
+    img{max-width:100%; height:auto; display:block}
 
-    /* ==== Side Nav (desktop) ==== */
+    .wrap{display:flex; min-height:100vh}
+    .muted{color:var(--muted)}
+    .chip{border:1px solid var(--border); color:var(--muted); padding:6px 10px; border-radius:999px; font-size:12px}
+
+    /* 侧边导航（桌面） */
     .sidenav{
       width:270px; flex:0 0 270px; position:sticky; top:0; height:100vh;
-      padding:28px 22px; box-sizing:border-box; border-right:1px solid var(--border);
-      background: linear-gradient(180deg, rgba(79,70,229,.06), transparent 40%), var(--bg);
+      padding:22px; box-sizing:border-box; border-right:1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(24,195,161,.10), transparent 50%),
+        var(--bg);
     }
-    .brand{display:flex; align-items:center; gap:12px; margin-bottom:10px}
-    .dot{width:12px;height:12px;border-radius:50%; background:var(--accent); box-shadow:0 0 18px rgba(6,182,212,.5)}
-    .brand h1{margin:0; font-size:22px}
-    .brand p{margin:6px 0 0; color:var(--muted); font-size:13px}
+    .brand{display:flex; gap:12px; align-items:center; margin-bottom:12px}
+    .dot{width:12px;height:12px;border-radius:50%; background:var(--accent); box-shadow:0 0 18px rgba(24,195,161,.6)}
+    .brand h1{margin:0; font-size:22px; line-height:1.2}
+    .brand p{margin:6px 0 0; color:#5f6b76; font-size:13px}
 
-    nav ul{list-style:none; margin:18px 0 0; padding:0; display:flex; flex-direction:column; gap:8px}
+    nav ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
     nav a{
-      display:block; padding:10px 12px; border-radius:12px; color:var(--text);
+      display:block; padding:10px 12px; border-radius:12px; color:#1c2631;
       border:1px solid transparent;
     }
-    nav a:hover{background:rgba(79,70,229,.06); border-color:var(--border)}
-    nav a.active{background:#fff; border-color:var(--border); box-shadow:var(--shadow)}
+    nav a:hover{background:rgba(79,141,247,.12); border-color:#e8edf3}
+    nav a.active{background:#fff; border-color:#e8edf3; box-shadow:0 8px 20px rgba(0,0,0,.06)}
 
-    .theme-switch{display:flex; gap:8px; margin-top:14px}
-    .swatch{
-      width:22px;height:22px;border-radius:50%;border:1px solid var(--border);cursor:pointer
+    .side-foot{position:absolute; left:22px; right:22px; bottom:18px; font-size:12px; color:#6c7680}
+
+    /* 顶部横幅（背景图 + 半透明遮罩 + 标题） */
+    .hero{
+      position:relative; height:var(--hero-height); width:100%;
+      background: var(--hero-overlay);
+      overflow:hidden;
     }
-    .swatch.sky{background:conic-gradient(from 0deg,#4f46e5,#06b6d4)}
-    .swatch.mint{background:conic-gradient(from 0deg,#059669,#14b8a6)}
-    .swatch.sand{background:conic-gradient(from 0deg,#f59e0b,#a16207)}
+    .hero::before{
+      /* 上传你的横幅图到 /images/hero.jpg 或替换为外链 */
+      content:""; position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.25)),
+        url('/images/hero.jpg') center/cover no-repeat;
+      filter:saturate(1.05) brightness(0.95);
+      z-index:0;
+    }
+    .hero-inner{
+      position:relative; z-index:1; height:100%;
+      display:flex; align-items:end; justify-content:center;
+      padding:18px;
+    }
+    .hero h1{
+      color:#fff; margin:0; font-size:36px; text-shadow:0 2px 12px rgba(0,0,0,.35);
+    }
+    .hero p{color:#eef2f6; margin:.3em 0 0; text-shadow:0 2px 10px rgba(0,0,0,.3)}
 
-    .side-foot{position:absolute; left:22px; right:22px; bottom:18px; font-size:12px; color:var(--muted)}
+    /* 头像卡片（叠加在横幅下缘） */
+    .profile{
+      position:relative; margin:-52px auto 0; /* 让卡片上移覆盖在横幅下缘 */
+      max-width:980px; padding:0 28px; z-index:2;
+    }
+    .profile-card{
+      background:var(--panel); color:var(--text); border:1px solid var(--border);
+      border-radius:var(--radius); box-shadow:var(--shadow); padding:22px;
+      display:grid; gap:18px; grid-template-columns: 96px 1fr;
+    }
+    .avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid #fff; box-shadow:0 6px 16px rgba(0,0,0,.3)}
+    .profile h2{margin:0 0 6px}
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:6px}
 
-    /* ==== Content ==== */
-    main{flex:1; max-width:980px; padding:28px; margin:0 auto}
+    /* 主内容区 */
+    main{flex:1; max-width:980px; padding:24px 28px 60px; margin:0 auto}
     section{
-      background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
-      padding:22px; margin-bottom:18px; box-shadow: var(--shadow);
+      background:var(--panel); color:var(--text);
+      border:1px solid var(--border); border-radius:var(--radius);
+      padding:22px; margin:18px 0; box-shadow:var(--shadow);
     }
     h2{margin:0 0 10px; font-size:20px}
 
-    .grid{display:grid; gap:18px}
-    @media (min-width:900px){ .grid.two{grid-template-columns:2fr 1.2fr} }
-
-    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
-    .chip{
-      background:var(--chip); color:var(--brand); border:1px solid var(--border);
-      padding:6px 10px; border-radius:999px; font-size:12px
+    /* Research 两种模式：gallery（带图栅格）/ list（纯列表） */
+    .research.gallery .items{display:grid; gap:14px}
+    @media (min-width:900px){ .research.gallery .items{grid-template-columns:repeat(3,1fr)} }
+    .card{
+      background:#11151c; color:#e9eef5; border:1px solid #2a313c; border-radius:12px; overflow:hidden;
     }
+    .card img{width:100%; height:160px; object-fit:cover}
+    .card .meta{padding:10px 12px; font-size:14px}
+    .research.list ul{padding-left:18px; margin:8px 0}
+    .research.list li{margin:6px 0}
 
-    .btn{
-      display:inline-block; padding:10px 14px; border-radius:12px;
-      color:#fff; background:linear-gradient(180deg, var(--brand), color-mix(in srgb, var(--brand) 85%, black));
-      border:1px solid color-mix(in srgb, var(--brand) 60%, black);
-      box-shadow:0 8px 20px color-mix(in srgb, var(--brand) 25%, transparent);
-    }
-    .btn:hover{text-decoration:none; filter:brightness(1.05)}
-    .btn.ghost{
-      color:var(--brand); background:#fff; border:1px solid var(--brand);
-      box-shadow:0 4px 10px rgba(0,0,0,.05)
-    }
-
-    /* Topbar (mobile) */
-    .topbar{display:none; position:sticky; top:0; z-index:30; background:var(--bg);
-      border-bottom:1px solid var(--border); padding:10px 14px}
-    .topbar a{margin-right:12px}
-
-    /* Mobile tweaks */
+    /* 底部与移动端 */
+    .topbar{display:none}
     @media (max-width:980px){
       .wrap{display:block}
-      .sidenav{position:relative; height:auto; width:auto; border-right:none; padding:16px}
+      .sidenav{position:relative; height:auto; width:auto; border-right:none}
       nav ul{flex-direction:row; flex-wrap:wrap}
-      .side-foot{position:static; margin-top:12px}
+      .side-foot{position:static; margin-top:8px}
+      .profile{padding:0 16px}
       main{padding:16px}
+      .profile-card{grid-template-columns:72px 1fr}
+      .avatar{width:72px;height:72px}
     }
-
-    /* Simple list styles */
-    ul.clean{padding-left:18px;margin:8px 0}
-    ul.clean li{margin:6px 0}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   </style>
 </head>
 
-<!-- 修改 body 的 class 即可切换主题：theme-sky / theme-mint / theme-sand -->
-<body class="theme-sky">
-
-  <!-- 顶部（移动端更好用） -->
-  <div class="topbar">
-    <a href="#top">Top</a>
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#edu">Education</a>
-    <a href="#research">Research</a>
-    <a href="#pubs">Publications</a>
-    <a href="#awards">Awards</a>
-    <a href="#cv">CV</a>
-    <a href="#contact">Contact</a>
-  </div>
-
+<body class="js-font">
+  <!-- 侧边导航 -->
   <div class="wrap">
-    <!-- 侧边导航（桌面端固定） -->
     <aside class="sidenav">
       <div class="brand">
         <span class="dot"></span>
@@ -144,150 +156,149 @@
           <p>Atmospheric Chemistry</p>
         </div>
       </div>
-
       <nav>
         <ul>
           <li><a class="active" href="#top">Top</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#edu">Education</a></li>
           <li><a href="#research">Research</a></li>
           <li><a href="#pubs">Publications</a></li>
-          <li><a href="#awards">Awards</a></li>
+          <li><a href="#talks">Talks</a></li>
           <li><a href="#cv">CV</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
 
-      <!-- 主题切换小圆点 -->
-      <div class="theme-switch">
-        <div class="swatch sky" title="Sky" onclick="setTheme('theme-sky')"></div>
-        <div class="swatch mint" title="Mint" onclick="setTheme('theme-mint')"></div>
-        <div class="swatch sand" title="Sand" onclick="setTheme('theme-sand')"></div>
+      <!-- 字体切换（示例）：Sans / Serif -->
+      <div style="margin-top:12px; display:flex; gap:8px; align-items:center">
+        <span class="chip" onclick="setHeadingFont('sans')" title="Headings Sans">Aa</span>
+        <span class="chip" onclick="setHeadingFont('serif')" title="Headings Serif">Aa</span>
       </div>
 
       <div class="side-foot">
-        <div>songhuan@pku.edu.cn · huansong@uw.edu</div>
+        <div>songhuan@pku.edu.cn</div>
         <div>© <span id="year"></span> Huan Song</div>
       </div>
     </aside>
 
-    <!-- 内容 -->
-    <main>
-      <!-- 顶部卡片 -->
-      <section id="intro" class="grid two">
-        <div>
-          <h2>Huan Song 宋欢</h2>
-          <p class="muted">
-            Multiphase oxidation, HOx radicals & aerosol aging.
-            Lab kinetics × field observations × models for atmospheric chemical budgets.
-          </p>
-          <div class="chips">
-            <span class="chip">Peking University · CESE</span>
-            <span class="chip">UW · Atmospheric & Climate Science</span>
-            <span class="chip">HOx / H₂O₂ budgets</span>
+    <!-- 顶部横幅 + 头像卡片 -->
+    <div style="flex:1">
+      <header class="hero">
+        <div class="hero-inner">
+          <div style="text-align:center">
+            <h1>Atmospheric Multiphase Chemistry</h1>
+            <p>HOx radicals · Aerosol aging · Aqueous & heterogeneous processes</p>
           </div>
-          <p style="margin-top:12px">
-            <a class="btn" href="#cv">View CV</a>
-            <a class="btn ghost" href="mailto:songhuan@pku.edu.cn">Contact</a>
+        </div>
+      </header>
+
+      <div class="profile">
+        <div class="profile-card">
+          <!-- 上传你的照片到 /images/avatar.jpg -->
+          <img class="avatar" src="/images/avatar.jpg" alt="Huan Song portrait" />
+          <div>
+            <h2>Huan Song 宋欢</h2>
+            <div class="muted">Peking University · College of Environmental Sciences & Engineering</div>
+            <div class="chips" style="margin-top:8px">
+              <span class="chip">HOx / H₂O₂ budgets</span>
+              <span class="chip">Multiphase modeling</span>
+              <span class="chip">Lab kinetics · Field obs</span>
+            </div>
+            <p style="margin:10px 0 0">
+              <a href="#cv" class="chip" style="border-color:#3b82f6; color:#cfe2ff">CV (PDF)</a>
+              <a href="mailto:songhuan@pku.edu.cn" class="chip">Contact</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 主体内容 -->
+      <main>
+        <section id="about">
+          <h2>About</h2>
+          <p>
+            I study multiphase atmospheric chemistry with a focus on aqueous and heterogeneous oxidation pathways
+            controlling HOx and peroxide budgets. My work bridges laboratory kinetic experiments, 0-D modeling, and
+            analysis of field campaigns across urban and marine environments.
           </p>
-        </div>
-        <div>
-          <!-- 上传你的头像到 /images/avatar.jpg -->
-          <img src="/images/avatar.jpg" alt="Portrait of Huan Song" />
-        </div>
-      </section>
+        </section>
 
-      <section id="about">
-        <h2>About</h2>
-        <p>
-          I study multiphase atmospheric chemistry with a focus on aqueous and heterogeneous oxidation pathways
-          controlling HOx and peroxide budgets. My work bridges laboratory kinetic experiments, 0-D/box modeling,
-          and analysis of comprehensive field campaigns across urban and marine environments.
-        </p>
-      </section>
+        <!-- Research：将 class="research gallery" 改为 "research list" 即可切换到纯文本列表 -->
+        <section id="research" class="research gallery">
+          <h2>Research</h2>
+          <div class="items">
+            <!-- 示例卡片①：替换为你的研究配图 -->
+            <article class="card">
+              <img src="/images/research1.jpg" alt="HOx multiphase model visualization">
+              <div class="meta"><b>HOx budgets in multiphase systems</b> — PKU-MARK simulations of H₂O₂ & HO₂ uptake.</div>
+            </article>
+            <!-- 示例卡片② -->
+            <article class="card">
+              <img src="/images/research2.jpg" alt="ESR radicals detection">
+              <div class="meta"><b>Radicals detection</b> — ESR of OH/O₂⁻/carbonate radicals in aerosol extracts.</div>
+            </article>
+            <!-- 示例卡片③ -->
+            <article class="card">
+              <img src="/images/research3.jpg" alt="Field observation campaign">
+              <div class="meta"><b>Field campaign</b> — Observation–model integration across urban & marine sites.</div>
+            </article>
+          </div>
 
-      <section id="experience">
-        <h2>Employment</h2>
-        <ul class="clean">
-          <li><b>Visiting Scholar</b>, Department of Atmospheric & Climate Science, University of Washington — <i>Nov 2024–present</i></li>
-          <li><b>Postdoctoral Research Fellow</b> (Boya Research Fellowship), College of Environmental Sciences & Engineering, Peking University — <i>Aug 2022–Aug 2024</i></li>
-        </ul>
-        <p class="muted">Independent funds include the Young Scientists Fund of the National Natural Science Foundation of China.</p>
-      </section>
+          <!-- 如果不想展示图片，把上面的 <div class="items">…</div> 删掉，
+               用下面的无图列表替代，并把 <section> 的 class 改成 research list
+          <ul>
+            <li>HOx budgets in multiphase systems — parameterizing HO₂ uptake.</li>
+            <li>Radicals detection by ESR; LIF measurement & flow tube experiments.</li>
+            <li>Field observation & box-model analysis for SOA aging.</li>
+          </ul>
+          -->
+        </section>
 
-      <section id="edu">
-        <h2>Education</h2>
-        <ul class="clean">
-          <li><b>Ph.D., Environmental Sciences</b>, Peking University — <i>2017–2022</i> (Supervisor: Prof. Keding Lu)</li>
-          <li><b>B.Eng., Environmental Sciences & Engineering</b>, Renmin University of China — <i>2013–2017</i> (GPA 3.93/4, Rank 1/23)</li>
-          <li>Summer Course, Atmospheric Chemistry — Forschungszentrum Jülich, Germany — <i>Sep 2019</i></li>
-        </ul>
-      </section>
+        <section id="pubs">
+          <h2>Selected Publications</h2>
+          <ul style="padding-left:18px; margin:8px 0">
+            <li>
+              <b>Song, H.</b>, Lu, K., Dong, H., Tan, Z., Chen, Z., Zeng, L., Zhang, Y. (2024).
+              Aerosol particle effects on atmospheric budgets of H₂O₂ and HOx — a multiphase model study.
+              <i>EGU24</i>. <a href="#">abs</a> · <a href="#">slides</a>
+            </li>
+            <li>
+              <b>Song, H.</b>, Zou, Q., Lu, K. (2019). Lab experiments on HO₂ uptake interpreted by a kinetic model.
+              <i>AGU Fall Meeting Abstracts</i>. <a href="#">abs</a>
+            </li>
+          </ul>
+          <p class="muted">(* presenting/corresponding author)</p>
+        </section>
 
-      <section id="research">
-        <h2>Research Highlights</h2>
-        <ul class="clean">
-          <li>Developed a multiphase reaction kinetic model (PKU-MARK) to simulate HO₂ uptake and condensed-phase concentrations; proposed a parameterization aligned with IUPAC recommendations.</li>
-          <li>Measured heterogeneous HO₂ uptake on particles using an FEP-coated flow tube + LIF, characterized uptake coefficients for copper-doped (NH₄)₂SO₄ aerosols.</li>
-          <li>Field campaign participation; SMPS operation; high-volume PM₂.₅ sampling; ESR detection of radicals (OH, O₂⁻, carbonate) in aerosol extracts under simulated sunlight.</li>
-          <li>Isoprene oxidation mechanism: OFR-based ROx generation and LIF calibration, method to quantify ROx components.</li>
-        </ul>
-        <div class="chips">
-          <span class="chip">Multiphase & Heterogeneous chemistry</span>
-          <span class="chip">HOx / H₂O₂ budgets</span>
-          <span class="chip">ESR / LIF / OFR</span>
-          <span class="chip">PKU-MARK modeling</span>
-        </div>
-      </section>
+        <section id="talks">
+          <h2>Talks</h2>
+          <ul style="padding-left:18px; margin:8px 0">
+            <li>EGU 2024 — AS3.33 oral, Vienna. <a href="#">abstract</a></li>
+            <li>AGU 2019 — A11K poster, San Francisco. <a href="#">abstract</a></li>
+          </ul>
+        </section>
 
-      <section id="pubs">
-        <h2>Selected Publications</h2>
-        <ul class="clean">
-          <li>Song, H., Chen, X., <i>Lu, K.D.</i>, et al. (2020). Influence of aerosol copper on HO₂ uptake: a novel parameterized equation. <i>Atmospheric Chemistry and Physics</i>. <a href="https://doi.org/10.5194/acp-20-15835-2020">DOI</a></li>
-          <li>Song, H., Zou, Q., <i>Lu, K.D.</i> (2020). Parameterization and application of HO₂ heterogeneous uptake coefficient. <i>Progress in Chemistry</i>. <a href="https://doi.org/10.7536/PC200749">DOI</a></li>
-          <li>Song, H., <i>Lu, K.D.</i>, Ye, C., et al. (2021). Multiphase model analysis of SO₂ oxidations in summer & winter. <i>Atmospheric Chemistry and Physics</i>. <a href="https://doi.org/10.5194/acp-21-13713-2021">DOI</a></li>
-          <li>Song, H., <i>Lu, K.D.</i>, Dong, H.B., et al. (2021). Reduced aerosol uptake of HO₂ may increase O₃ sensitivity to VOCs. <i>Environmental Science & Technology Letters</i>. <a href="https://doi.org/10.1021/acs.estlett.1c00893">DOI</a></li>
-          <li>Song, H., <i>Lu, K.D.</i>, Dong, H.B., et al. (2023). Impact of in-situ peroxide formation by metal complexes on H₂O₂ budgets. <i>Science of the Total Environment</i>, <b>submitted</b>.</li>
-          <li>Zou, Q., <b>Song, H.</b>, Tang, M., <i>Lu, K.</i> (2019). HO₂ uptake on aqueous (NH₄)₂SO₄ aerosol with LIF flow tube. <i>Chinese Chemical Letters</i>. <a href="https://doi.org/10.1016/j.cclet.2019.07.041">DOI</a></li>
-          <li>Ye, C., <i>Lu, K.D.</i>, <b>Song, H.</b>, Mu, Y., et al. (2022). Review of sulfate aerosol formation during winter pollution. <i>Journal of Environmental Sciences</i>. <a href="https://doi.org/10.1016/j.jes.2022.07.011">DOI</a></li>
-          <li>Software copyright: “Gas-liquid interface multiphase reaction model software V1.0” (2018SR1069992).</li>
-        </ul>
-      </section>
+        <section id="cv">
+          <h2>Curriculum Vitae</h2>
+          <p>Download: <a class="chip" style="border-color:#3b82f6;color:#cfe2ff" href="/files/HuanSong_CV.pdf">CV (PDF)</a></p>
+        </section>
 
-      <section id="awards">
-        <h2>Awards</h2>
-        <ul class="clean">
-          <li>Peking University Headmaster Scholarship (2020–2021)</li>
-          <li>PKU “Three-Good Student” (2020–2021)</li>
-          <li>Renmin University: Multiple scholarships & merit awards (2013–2016)</li>
-        </ul>
-      </section>
+        <section id="contact">
+          <h2>Contact</h2>
+          <p>Email: <a href="mailto:songhuan@pku.edu.cn">songhuan@pku.edu.cn</a></p>
+          <p>College of Environmental Sciences & Engineering, Peking University</p>
+          <p>
+            <a href="https://scholar.google.com/" target="_blank" rel="noreferrer">Google Scholar</a> ·
+            <a href="https://orcid.org/" target="_blank" rel="noreferrer">ORCID</a> ·
+            <a href="https://github.com/huansong-uw" target="_blank" rel="noreferrer">GitHub</a>
+          </p>
+          <p class="muted">Last updated: <span id="lastUpdate"></span></p>
+        </section>
 
-      <section id="cv">
-        <h2>Curriculum Vitae</h2>
-        <p>Download: <a class="btn" href="/files/HuanSong_CV.pdf">CV (PDF)</a></p>
-        <!-- 把你的简历PDF上传到 /files/HuanSong_CV.pdf -->
-      </section>
-
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:songhuan@pku.edu.cn">songhuan@pku.edu.cn</a> · <a href="mailto:huansong@uw.edu">huansong@uw.edu</a></p>
-        <p>Peking University — College of Environmental Sciences & Engineering</p>
-        <p>University of Washington — Department of Atmospheric & Climate Science</p>
-        <p>
-          <a href="https://scholar.google.com/" target="_blank" rel="noreferrer">Google Scholar</a> ·
-          <a href="https://orcid.org/" target="_blank" rel="noreferrer">ORCID</a> ·
-          <a href="https://github.com/huansong-uw" target="_blank" rel="noreferrer">GitHub</a>
-        </p>
-        <p class="muted">Last updated: <span id="lastUpdate"></span></p>
-      </section>
-
-      <section>
-        <p class="muted">© <span id="year"></span> Huan Song · Built on GitHub Pages</p>
-        <p><a href="#top">↑ Back to top</a></p>
-      </section>
-    </main>
+        <section>
+          <p class="muted">© <span id="year"></span> Huan Song · Built on GitHub Pages · <a href="#top">↑ Back to top</a></p>
+        </section>
+      </main>
+    </div>
   </div>
 
   <script>
@@ -304,17 +315,18 @@
     },{rootMargin:"-40% 0px -55% 0px", threshold:0});
     targets.forEach(t=>io.observe(t));
 
-    // 主题切换（记忆到 localStorage）
-    function setTheme(name){
-      document.body.className=name;
-      localStorage.setItem('site-theme', name);
-    }
-    const saved = localStorage.getItem('site-theme');
-    if(saved) document.body.className=saved;
-
     // 年份与更新时间
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('lastUpdate').textContent = new Date().toISOString().slice(0,10);
+
+    // 标题字体切换（无刷新的简易开关）
+    function setHeadingFont(which){
+      if(which==='serif'){ document.body.classList.add('serif-headings'); }
+      else{ document.body.classList.remove('serif-headings'); }
+      localStorage.setItem('heading-font', which);
+    }
+    const saved = localStorage.getItem('heading-font');
+    if(saved==='serif'){ document.body.classList.add('serif-headings'); }
   </script>
 </body>
 </html>
