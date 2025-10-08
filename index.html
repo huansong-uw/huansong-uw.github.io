@@ -6,131 +6,115 @@
   <title>Huan Song | Atmospheric Chemistry</title>
   <meta name="description" content="Huan Song — atmospheric multiphase chemistry, HOx radicals, aerosol aging." />
 
-  <!-- 可切换字体：示例引入 Inter（无衬线）和 Noto Serif（衬线），按需保留其一 -->
+  <!-- 可选字体（无衬线 Inter / 衬线 Noto Serif），需要就保留 -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Serif:wght@400;600;700&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
 
   <style>
-    /* ====== 全局变量（你只改这里就能换字体/配色/圆角等） ====== */
+    /* ========= 主题变量：浅黄背景 + 深色文字，像示例站那样扁平 ========= */
     :root{
       --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
       --font-serif: "Noto Serif", Georgia, "Times New Roman", serif;
-      --use-serif-headings: 0;  /* 1 = 标题用衬线体，0 = 用无衬线体 */
 
-      --radius: 16px;
-      --shadow: 0 10px 24px rgba(0,0,0,.18);
+      --bg:      #FFF9E9;  /* 页面整体浅黄背景 */
+      --text:    #1F2937;  /* 主文字 深灰蓝 */
+      --muted:   #6B7280;  /* 次要文字 */
+      --border:  #E5E7EB;  /* 分隔线 */
+      --brand:   #4F46E5;  /* 链接主色（indigo） */
+      --accent:  #06B6D4;  /* 强调（cyan） */
 
-      /* 配色：背景浅黄色；面板深灰；文字浅色；强调色蓝青 */
-      --bg: #FFF9E9;        /* 页面整体背景（浅浅的黄色） */
-      --panel: #E6F1EA;     /* 浅薄荷灰 */
-      --text:  #14231A;     /* 墨绿黑 */
-      --muted: #A9B2BD;     /* 次要文字 */
-      --border: #2A313C;    /* 边框 */
-      --brand: #4F8DF7;     /* 主色（链接/按钮） */
-      --accent: #18C3A1;    /* 强调色（小点/高亮） */
+      --radius:  14px;
+      --shadow:  0 6px 18px rgba(0,0,0,.06);
 
-      /* 顶部横幅遮罩与高度 */
-      --hero-height: 44vh;  /* 调整横幅高度 */
-      --hero-overlay: rgba(0,0,0,.25);
+      --hero-height: 44vh;             /* 顶部横幅高度 */
+      --hero-overlay: rgba(0,0,0,.25); /* 横幅遮罩强度 */
     }
 
-    /* 基础排版 */
     html{scroll-behavior:smooth}
     body{
-      margin:0; background:var(--bg); color:#111;
-      font:16px/1.7 var(--font-sans);
+      margin:0; background:var(--bg); color:var(--text);
+      font:16px/1.75 var(--font-sans);
     }
-    body.serif-headings h1, body.serif-headings h2, body.serif-headings h3 { font-family: var(--font-serif); }
     a{color:var(--brand); text-decoration:none}
     a:hover{text-decoration:underline}
     img{max-width:100%; height:auto; display:block}
+    .muted{color:var(--muted)}
 
     .wrap{display:flex; min-height:100vh}
-    .muted{color:var(--muted)}
-    .chip{border:1px solid var(--border); color:var(--muted); padding:6px 10px; border-radius:999px; font-size:12px}
 
-    /* 侧边导航（桌面） */
+    /* 侧边导航（无 panel，轻描边&浅投影） */
     .sidenav{
-      width:270px; flex:0 0 270px; position:sticky; top:0; height:100vh;
-      padding:22px; box-sizing:border-box; border-right:1px solid var(--border);
-      background:
-        linear-gradient(180deg, rgba(24,195,161,.10), transparent 50%),
-        var(--bg);
+      width:260px; flex:0 0 260px; position:sticky; top:0; height:100vh;
+      padding:22px; box-sizing:border-box;
+      border-right:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(79,70,229,.06), transparent 40%), var(--bg);
     }
     .brand{display:flex; gap:12px; align-items:center; margin-bottom:12px}
-    .dot{width:12px;height:12px;border-radius:50%; background:var(--accent); box-shadow:0 0 18px rgba(24,195,161,.6)}
+    .dot{width:12px;height:12px;border-radius:50%; background:var(--accent); box-shadow:0 0 14px rgba(6,182,212,.6)}
     .brand h1{margin:0; font-size:22px; line-height:1.2}
-    .brand p{margin:6px 0 0; color:#5f6b76; font-size:13px}
+    .brand p{margin:6px 0 0; color:var(--muted); font-size:13px}
 
     nav ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
     nav a{
-      display:block; padding:10px 12px; border-radius:12px; color:#1c2631;
+      display:block; padding:10px 12px; border-radius:10px; color:var(--text);
       border:1px solid transparent;
     }
-    nav a:hover{background:rgba(79,141,247,.12); border-color:#e8edf3}
-    nav a.active{background:#fff; border-color:#e8edf3; box-shadow:0 8px 20px rgba(0,0,0,.06)}
+    nav a:hover{background:rgba(79,70,229,.08); border-color:var(--border)}
+    nav a.active{background:#fff; border:1px solid var(--border); box-shadow:var(--shadow)}
 
-    .side-foot{position:absolute; left:22px; right:22px; bottom:18px; font-size:12px; color:#6c7680}
+    .side-foot{position:absolute; left:22px; right:22px; bottom:18px; font-size:12px; color:var(--muted)}
 
-    /* 顶部横幅（背景图 + 半透明遮罩 + 标题） */
+    /* 顶部横幅（全宽背景图 + 文字遮罩） */
     .hero{
-      position:relative; height:var(--hero-height); width:100%;
-      background: var(--hero-overlay);
-      overflow:hidden;
+      position:relative; height:var(--hero-height); width:100%; overflow:hidden;
+      border-bottom:1px solid var(--border);
     }
     .hero::before{
-      /* 上传你的横幅图到 /images/hero.jpg 或替换为外链 */
       content:""; position:absolute; inset:0;
       background:
         linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.25)),
-        url('/images/hero.jpg') center/cover no-repeat;
+        url('/images/hero.jpg') center/cover no-repeat; /* ← 上传 /images/hero.jpg */
       filter:saturate(1.05) brightness(0.95);
       z-index:0;
     }
     .hero-inner{
       position:relative; z-index:1; height:100%;
-      display:flex; align-items:end; justify-content:center;
-      padding:18px;
+      display:flex; align-items:end; justify-content:center; text-align:center;
+      padding:18px; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.3)
     }
-    .hero h1{
-      color:#fff; margin:0; font-size:36px; text-shadow:0 2px 12px rgba(0,0,0,.35);
-    }
-    .hero p{color:#eef2f6; margin:.3em 0 0; text-shadow:0 2px 10px rgba(0,0,0,.3)}
+    .hero h1{margin:0; font-size:36px}
+    .hero p{margin:.35em 0 0}
 
-    /* 头像卡片（叠加在横幅下缘） */
+    /* 头像名片（扁平风，白底、轻阴影） */
     .profile{
-      position:relative; margin:-52px auto 0; /* 让卡片上移覆盖在横幅下缘 */
-      max-width:980px; padding:0 28px; z-index:2;
+      position:relative; margin:-48px auto 0; max-width:980px; padding:0 28px; z-index:2;
     }
     .profile-card{
-      background:var(--panel); color:var(--text); border:1px solid var(--border);
-      border-radius:var(--radius); box-shadow:var(--shadow); padding:22px;
-      display:grid; gap:18px; grid-template-columns: 96px 1fr;
+      background:#fff; color:var(--text); border:1px solid var(--border);
+      border-radius:var(--radius); box-shadow:var(--shadow); padding:18px;
+      display:grid; gap:16px; grid-template-columns: 96px 1fr;
     }
-    .avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid #fff; box-shadow:0 6px 16px rgba(0,0,0,.3)}
-    .profile h2{margin:0 0 6px}
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:6px}
+    .avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid #fff; box-shadow:0 6px 16px rgba(0,0,0,.12)}
 
-    /* 主内容区 */
+    /* 主内容：无 panel，扁平分节，仅用分隔线和留白 */
     main{flex:1; max-width:980px; padding:24px 28px 60px; margin:0 auto}
-    section{
-      background:var(--panel); color:var(--text);
-      border:1px solid var(--border); border-radius:var(--radius);
-      padding:22px; margin:18px 0; box-shadow:var(--shadow);
-    }
+    section{padding:18px 0; border-bottom:1px solid var(--border)}
+    section:last-of-type{border-bottom:none}
     h2{margin:0 0 10px; font-size:20px}
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+    .chip{border:1px solid var(--border); color:var(--muted); padding:6px 10px; border-radius:999px; font-size:12px; background:#fff}
 
-    /* Research 两种模式：gallery（带图栅格）/ list（纯列表） */
+    /* Research：两种模式——图墙 gallery（浅色卡片）/ 纯列表 list */
     .research.gallery .items{display:grid; gap:14px}
     @media (min-width:900px){ .research.gallery .items{grid-template-columns:repeat(3,1fr)} }
     .card{
-      background:#11151c; color:#e9eef5; border:1px solid #2a313c; border-radius:12px; overflow:hidden;
+      background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:var(--shadow);
     }
     .card img{width:100%; height:160px; object-fit:cover}
-    .card .meta{padding:10px 12px; font-size:14px}
+    .card .meta{padding:10px 12px; font-size:14px; color:var(--text)}
     .research.list ul{padding-left:18px; margin:8px 0}
     .research.list li{margin:6px 0}
 
-    /* 底部与移动端 */
+    /* 顶部简易导航（移动端） */
     .topbar{display:none}
     @media (max-width:980px){
       .wrap{display:block}
@@ -145,9 +129,9 @@
   </style>
 </head>
 
-<body class="js-font">
-  <!-- 侧边导航 -->
+<body>
   <div class="wrap">
+    <!-- 侧边导航 -->
     <aside class="sidenav">
       <div class="brand">
         <span class="dot"></span>
@@ -167,34 +151,28 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-
-      <!-- 字体切换（示例）：Sans / Serif -->
-      <div style="margin-top:12px; display:flex; gap:8px; align-items:center">
-        <span class="chip" onclick="setHeadingFont('sans')" title="Headings Sans">Aa</span>
-        <span class="chip" onclick="setHeadingFont('serif')" title="Headings Serif">Aa</span>
-      </div>
-
       <div class="side-foot">
         <div>songhuan@pku.edu.cn</div>
         <div>© <span id="year"></span> Huan Song</div>
       </div>
     </aside>
 
-    <!-- 顶部横幅 + 头像卡片 -->
+    <!-- 主列：横幅 + 头像 + 内容 -->
     <div style="flex:1">
+      <!-- 顶部横幅（风景/引入图） -->
       <header class="hero">
         <div class="hero-inner">
-          <div style="text-align:center">
+          <div>
             <h1>Atmospheric Multiphase Chemistry</h1>
             <p>HOx radicals · Aerosol aging · Aqueous & heterogeneous processes</p>
           </div>
         </div>
       </header>
 
+      <!-- 头像名片（白底扁平卡、轻投影） -->
       <div class="profile">
         <div class="profile-card">
-          <!-- 上传你的照片到 /images/avatar.jpg -->
-          <img class="avatar" src="/images/avatar.jpg" alt="Huan Song portrait" />
+          <img class="avatar" src="/images/avatar.jpg" alt="Huan Song portrait" /> <!-- 上传 /images/avatar.jpg -->
           <div>
             <h2>Huan Song 宋欢</h2>
             <div class="muted">Peking University · College of Environmental Sciences & Engineering</div>
@@ -204,14 +182,13 @@
               <span class="chip">Lab kinetics · Field obs</span>
             </div>
             <p style="margin:10px 0 0">
-              <a href="#cv" class="chip" style="border-color:#3b82f6; color:#cfe2ff">CV (PDF)</a>
+              <a href="#cv" class="chip" style="border-color:#D1D5DB">CV (PDF)</a>
               <a href="mailto:songhuan@pku.edu.cn" class="chip">Contact</a>
             </p>
           </div>
         </div>
       </div>
 
-      <!-- 主体内容 -->
       <main>
         <section id="about">
           <h2>About</h2>
@@ -222,32 +199,28 @@
           </p>
         </section>
 
-        <!-- Research：将 class="research gallery" 改为 "research list" 即可切换到纯文本列表 -->
+        <!-- Research：把 class 改为 "research list" 可切换为纯文本列表 -->
         <section id="research" class="research gallery">
           <h2>Research</h2>
           <div class="items">
-            <!-- 示例卡片①：替换为你的研究配图 -->
             <article class="card">
-              <img src="/images/research1.jpg" alt="HOx multiphase model visualization">
-              <div class="meta"><b>HOx budgets in multiphase systems</b> — PKU-MARK simulations of H₂O₂ & HO₂ uptake.</div>
+              <img src="/images/research1.jpg" alt="HOx multiphase model">
+              <div class="meta"><b>HOx budgets</b> — PKU-MARK simulations of H₂O₂ & HO₂ uptake.</div>
             </article>
-            <!-- 示例卡片② -->
             <article class="card">
               <img src="/images/research2.jpg" alt="ESR radicals detection">
               <div class="meta"><b>Radicals detection</b> — ESR of OH/O₂⁻/carbonate radicals in aerosol extracts.</div>
             </article>
-            <!-- 示例卡片③ -->
             <article class="card">
-              <img src="/images/research3.jpg" alt="Field observation campaign">
+              <img src="/images/research3.jpg" alt="Field campaigns">
               <div class="meta"><b>Field campaign</b> — Observation–model integration across urban & marine sites.</div>
             </article>
           </div>
 
-          <!-- 如果不想展示图片，把上面的 <div class="items">…</div> 删掉，
-               用下面的无图列表替代，并把 <section> 的 class 改成 research list
+          <!-- 纯文本模式示例（用它替换上面的 .items 并把 section 类改为 research list）
           <ul>
             <li>HOx budgets in multiphase systems — parameterizing HO₂ uptake.</li>
-            <li>Radicals detection by ESR; LIF measurement & flow tube experiments.</li>
+            <li>Radicals detection by ESR; LIF measurement & flow-tube experiments.</li>
             <li>Field observation & box-model analysis for SOA aging.</li>
           </ul>
           -->
@@ -279,7 +252,7 @@
 
         <section id="cv">
           <h2>Curriculum Vitae</h2>
-          <p>Download: <a class="chip" style="border-color:#3b82f6;color:#cfe2ff" href="/files/HuanSong_CV.pdf">CV (PDF)</a></p>
+          <p>Download: <a class="chip" href="/files/HuanSong_CV.pdf">CV (PDF)</a> <!-- 上传 /files/HuanSong_CV.pdf --></p>
         </section>
 
         <section id="contact">
@@ -318,15 +291,6 @@
     // 年份与更新时间
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('lastUpdate').textContent = new Date().toISOString().slice(0,10);
-
-    // 标题字体切换（无刷新的简易开关）
-    function setHeadingFont(which){
-      if(which==='serif'){ document.body.classList.add('serif-headings'); }
-      else{ document.body.classList.remove('serif-headings'); }
-      localStorage.setItem('heading-font', which);
-    }
-    const saved = localStorage.getItem('heading-font');
-    if(saved==='serif'){ document.body.classList.add('serif-headings'); }
   </script>
 </body>
 </html>
