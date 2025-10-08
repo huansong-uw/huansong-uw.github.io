@@ -6,68 +6,83 @@
   <title>Huan Song | Atmospheric Chemistry</title>
   <meta name="description" content="Huan Song — atmospheric multiphase chemistry, HOx radicals, aerosol aging." />
 
-  <!-- 可选字体（想换字体就改这一行；不用就删掉，走系统默认） -->
-  <!-- TODO[字体]：把 family= 后的字体改成你喜欢的，比如 Inter / Noto Serif / Source Sans 之类 -->
+  <!-- 可选字体（想换字体就改 family；不用则删除本行） -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
 
   <style>
-    /* ========= 主题变量：浅黄背景 + 深色文字（无 panel 扁平风） ========= */
+    /* ========= 主题变量 ========= */
     :root{
-      /* TODO[配色]：全站主色在这改。浅黄背景、深色文字；想换主色，改 --brand / --accent 即可 */
-      --bg:      #E6F1EA;  /* 页面整体浅薄荷灰 */
-      --text:    #1F2937;  /* 主文字 深灰蓝 */
+      /* 背景统一浅蓝 */
+      --bg:      #EFF6FF;  /* very light blue */
+
+      /* 正文文字与辅助色 */
+      --text:    #1F2937;  /* 深灰蓝（可读性强） */
       --muted:   #6B7280;  /* 次要文字 */
       --border:  #E5E7EB;  /* 分隔线 */
-      --brand:   #4F46E5;  /* 链接主色（indigo） */
-      --accent:  #06B6D4;  /* 强调（cyan） */
 
-      /* TODO[尺寸]：圆角/阴影/横幅高度想调就改这里 */
+      /* 站内主色（链接/按钮） */
+      --brand:   #3B82F6;  /* blue-500（可根据喜好替换） */
+      --accent:  #06B6D4;  /* cyan-500（圆点/强调） */
+
+      /* 左侧栏（深蓝纯色，不要渐变） */
+      --side-bg:     #0B1F3A;               /* 深蓝底色 */
+      --side-border: #0B1F3A;               /* 与底色一致或略浅 #10294A */
+      --side-text:   #E8EEF9;               /* 左栏普通文字（浅色） */
+      --side-muted:  #A9B7D3;               /* 左栏次要文字 */
+      --side-hover:  rgba(255,255,255,.08); /* 悬停底色：白色轻透明 */
+      --side-active: rgba(255,255,255,.16); /* 选中底色：白色半透明 */
+
+      /* 视觉细节 */
       --radius:  14px;
       --shadow:  0 6px 18px rgba(0,0,0,.06);
-      --hero-height: 44vh;             /* 顶部横幅高度 */
-      --hero-overlay: rgba(0,0,0,.25); /* 横幅遮罩强度 */
+
+      /* 顶部横幅参数 */
+      --hero-height: 44vh;
+      --hero-overlay: rgba(0,0,0,.25);
     }
 
-    /* TODO[字体]：全站正文字体，想改就把 Inter 换成你喜欢的 */
+    /* ========= 基础排版 ========= */
+    html{scroll-behavior:smooth}
     body{
       margin:0; background:var(--bg); color:var(--text);
       font:16px/1.75 "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
     }
-    html{scroll-behavior:smooth}
     a{color:var(--brand); text-decoration:none}
     a:hover{text-decoration:underline}
     img{max-width:100%; height:auto; display:block}
     .muted{color:var(--muted)}
     .wrap{display:flex; min-height:100vh}
 
-    /* 侧边导航（无 panel，轻描边&浅投影） */
+    /* ========= 左侧导航（深蓝纯色 + 浅色文字 + 白色半透明高亮） ========= */
     .sidenav{
       width:260px; flex:0 0 260px; position:sticky; top:0; height:100vh;
-      padding:22px; box-sizing:border-box; border-right:1px solid var(--border);
-      background: linear-gradient(180deg, rgba(79,70,229,.06), transparent 40%), var(--bg);
+      padding:22px; box-sizing:border-box;
+      border-right:1px solid var(--side-border);
+      background: var(--side-bg); /* 纯色，已去渐变 */
     }
     .brand{display:flex; gap:12px; align-items:center; margin-bottom:12px}
-    .dot{width:12px;height:12px;border-radius:50%; background:var(--accent); box-shadow:0 0 14px rgba(6,182,212,.6)}
-    .brand h1{margin:0; font-size:22px; line-height:1.2}
-    .brand p{margin:6px 0 0; color:var(--muted); font-size:13px}
+    .dot{width:12px;height:12px;border-radius:50%; background:#22D3EE; box-shadow:0 0 14px rgba(34,211,238,.6)} /* 圆点亮一点 */
+    .brand h1{margin:0; font-size:22px; line-height:1.2; color:#fff}
+    .brand p{margin:6px 0 0; font-size:13px; color:var(--side-muted)}
 
     nav ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-    nav a{
-      display:block; padding:10px 12px; border-radius:10px; color:var(--text);
-      border:1px solid transparent;
+    .sidenav nav a{
+      display:block; padding:10px 12px; border-radius:10px;
+      color: var(--side-text); border:1px solid transparent; background: transparent;
+      transition: background .15s ease;
     }
-    nav a:hover{background:rgba(79,70,229,.08); border-color:var(--border)}
-    nav a.active{background:#fff; border:1px solid var(--border); box-shadow:var(--shadow)}
+    .sidenav nav a:hover{  background: var(--side-hover);  border-color: transparent; }
+    .sidenav nav a.active{ background: var(--side-active); border-color: transparent; box-shadow: none; }
 
-    .side-foot{position:absolute; left:22px; right:22px; bottom:18px; font-size:12px; color:var(--muted)}
+    .side-foot{position:absolute; left:22px; right:22px; bottom:18px; font-size:12px; color:var(--side-muted)}
 
-    /* 顶部横幅（全宽背景图 + 文字遮罩） */
+    /* ========= 顶部横幅（全宽背景图） ========= */
     .hero{
       position:relative; height:var(--hero-height); width:100%; overflow:hidden;
       border-bottom:1px solid var(--border);
     }
     .hero::before{
-      /* TODO[横幅图]：把 /images/hero.jpg 换成你的横幅大图路径（宽屏风景/引入图最佳） */
+      /* TODO[横幅图]：把 /images/hero.jpg 换成你的横幅图片路径 */
       content:""; position:absolute; inset:0;
       background:
         linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.25)),
@@ -83,7 +98,7 @@
     .hero h1{margin:0; font-size:36px}
     .hero p{margin:.35em 0 0}
 
-    /* 头像名片（白底扁平卡、轻投影） */
+    /* ========= 头像名片（白底扁平卡、轻投影） ========= */
     .profile{
       position:relative; margin:-48px auto 0; max-width:980px; padding:0 28px; z-index:2;
     }
@@ -94,7 +109,7 @@
     }
     .avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid #fff; box-shadow:0 6px 16px rgba(0,0,0,.12)}
 
-    /* 主内容：无 panel，扁平分节，仅用分隔线和留白 */
+    /* ========= 主内容：无 panel，扁平分节 ========= */
     main{flex:1; max-width:980px; padding:24px 28px 60px; margin:0 auto}
     section{padding:18px 0; border-bottom:1px solid var(--border)}
     section:last-of-type{border-bottom:none}
@@ -102,7 +117,7 @@
     .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
     .chip{border:1px solid var(--border); color:var(--muted); padding:6px 10px; border-radius:999px; font-size:12px; background:#fff}
 
-    /* Research：两种模式——图墙 gallery（浅色卡片）/ 纯列表 list */
+    /* Research：图墙 / 列表 */
     .research.gallery .items{display:grid; gap:14px}
     @media (min-width:900px){ .research.gallery .items{grid-template-columns:repeat(3,1fr)} }
     .card{background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:var(--shadow)}
@@ -111,14 +126,14 @@
     .research.list ul{padding-left:18px; margin:8px 0}
     .research.list li{margin:6px 0}
 
-    /* Publications：年份折叠（details/summary），方便放“全部”且可展开/折叠 */
+    /* Publications：年份折叠 */
     details{border:1px solid var(--border); border-radius:10px; background:#fff; box-shadow:var(--shadow); margin:10px 0}
     summary{cursor:pointer; padding:10px 12px; font-weight:600; list-style:none}
     summary::-webkit-details-marker{display:none}
     .publist{padding:0 16px 10px 28px}
     .publist li{margin:8px 0}
 
-    /* 顶部简易导航（移动端） */
+    /* ========= 移动端 ========= */
     .topbar{display:none}
     @media (max-width:980px){
       .wrap{display:block}
@@ -135,8 +150,7 @@
 
 <body>
   <div class="wrap">
-    <!-- ===== 左侧导航栏 =====
-         TODO[姓名/头衔/邮箱]：改 h1 / p / 底部邮箱；想加/减菜单项就改 <nav> 里的 <li> -->
+    <!-- 左侧导航（深蓝纯色） -->
     <aside class="sidenav">
       <div class="brand">
         <span class="dot"></span>
@@ -162,10 +176,9 @@
       </div>
     </aside>
 
-    <!-- 主列：横幅 + 头像 + 内容 -->
+    <!-- 主列：横幅 + 头像 + 内容（无 panel 扁平风） -->
     <div style="flex:1">
-      <!-- ===== 顶部横幅（风景/引入图） =====
-           TODO[横幅图]：把 /images/hero.jpg 换成你的横幅大图路径 -->
+      <!-- 顶部横幅（风景/引入图） -->
       <header class="hero">
         <div class="hero-inner">
           <div>
@@ -175,31 +188,28 @@
         </div>
       </header>
 
-      <!-- ===== 头像名片（白底扁平卡） =====
-           TODO[头像]：把 /images/avatar.jpg 换成你的照片路径 -->
+      <!-- 头像名片 -->
       <div class="profile">
         <div class="profile-card">
-          <img class="avatar" src="/images/avatar.jpg" alt="Huan Song portrait" />
+          <img class="avatar" src="/images/avatar.jpg" alt="Huan Song portrait" /> <!-- 上传 /images/avatar.jpg -->
           <div>
-            <h2>Huan Song 宋欢</h2> <!-- ← 名片标题（可写中文名+英文名） -->
-            <div class="muted">Peking University · College of Environmental Sciences & Engineering</div> <!-- ← 单位 -->
+            <h2>Huan Song 宋欢</h2>
+            <div class="muted">Peking University · College of Environmental Sciences & Engineering</div>
             <div class="chips" style="margin-top:8px">
-              <!-- TODO[研究标签]：按需增删 -->
               <span class="chip">HOx / H₂O₂ budgets</span>
               <span class="chip">Multiphase modeling</span>
               <span class="chip">Lab kinetics · Field obs</span>
             </div>
             <p style="margin:10px 0 0">
-              <a href="#cv" class="chip" style="border-color:#D1D5DB">CV (PDF)</a> <!-- TODO[CV]：下方 CV 段落设置实际链接 -->
-              <a href="mailto:songhuan@pku.edu.cn" class="chip">Contact</a>         <!-- TODO[邮箱]：改成你的邮箱 -->
+              <a href="#cv" class="chip" style="border-color:#D1D5DB">CV (PDF)</a>
+              <a href="mailto:songhuan@pku.edu.cn" class="chip">Contact</a>
             </p>
           </div>
         </div>
       </div>
 
       <main>
-        <!-- ===== About =====
-             TODO[About]：写 3–6 句你做什么、怎么做、为何重要 -->
+        <!-- About -->
         <section id="about">
           <h2>About</h2>
           <p>
@@ -209,11 +219,7 @@
           </p>
         </section>
 
-        <!-- ===== Research =====
-             * “图墙模式”：section class="research gallery" + 下面 .items 三张（或更多）卡片
-             * “纯列表模式”：把 class 改成 research list，并用注释里的 <ul> 替换 .items
-             TODO[研究图]：把 /images/research*.jpg 换成你的图；不想用图，就用下面的列表模板
-        -->
+        <!-- Research：图墙模式（改为 class="research list" + 下方列表可切换为纯文本） -->
         <section id="research" class="research gallery">
           <h2>Research</h2>
           <div class="items">
@@ -231,7 +237,7 @@
             </article>
           </div>
 
-          <!-- 纯文本模式（把上面的 .items 删掉，然后把本注释下方的 <ul> 取消注释，同时把 section 类改为 research list）
+          <!-- 纯文本模式示例（替换上面的 .items 并把 section 类改为 research list）
           <ul>
             <li>HOx budgets in multiphase systems — parameterizing HO₂ uptake.</li>
             <li>Radicals detection by ESR; LIF measurement & flow-tube experiments.</li>
@@ -240,29 +246,20 @@
           -->
         </section>
 
-        <!-- ===== Publications（全部发表 All Publications）=====
-             结构说明：
-             - 按“年份”分组，用 <details> 折叠；summary 里写年份与当年条目数
-             - 每条格式建议：作者（加粗你自己名字或*通讯/报告人*标记）+ 年份 + 题目 + 期刊/会议 + 链接
-             - 可选字段：DOI 链接、PDF（仓库 /files 下）、BibTeX（仓库 /files 下）
-             - 想新增年份：复制一个 <details> 块改成新年份，条目按倒序排
-             TODO[发表]：把示例条目全部替换成你的“全部发表”，需要多少就放多少
-        -->
+        <!-- Publications（全部） -->
         <section id="pubs">
           <h2>Publications (All)</h2>
 
-          <!-- === 2024 示例 === -->
           <details open>
-            <summary>2024 &nbsp; <span class="muted">(2)</span></summary> <!-- TODO[数量]：改为当年条目总数 -->
+            <summary>2024 &nbsp; <span class="muted">(2)</span></summary>
             <ul class="publist">
               <li>
                 <b>Song, H.</b>, Lu, K., Dong, H., Tan, Z., Chen, Z., Zeng, L., Zhang, Y. (2024).
                 Aerosol particle effects on atmospheric budgets of H₂O₂ and HOx — a multiphase model study.
                 <i>EGU24</i>.
-                <!-- TODO[链接]：把 # 替换为真实链接；有 PDF 就把文件放 /files 下 -->
                 <a href="#" target="_blank" rel="noreferrer">abstract</a> ·
                 <a href="#" target="_blank" rel="noreferrer">slides</a> ·
-                <a href="/files/2024_song_hox.pdf" target="_blank" rel="noreferrer">PDF</a> <!-- 可选 -->
+                <a href="/files/2024_song_hox.pdf" target="_blank" rel="noreferrer">PDF</a>
               </li>
               <li>
                 <b>Song, H.</b>, Chen, X., <i>Lu, K.D.</i>, et al. (2024).
@@ -273,7 +270,6 @@
             </ul>
           </details>
 
-          <!-- === 2023 示例 === -->
           <details>
             <summary>2023 &nbsp; <span class="muted">(1)</span></summary>
             <ul class="publist">
@@ -285,7 +281,6 @@
             </ul>
           </details>
 
-          <!-- === 2022 示例 === -->
           <details>
             <summary>2022 &nbsp; <span class="muted">(1)</span></summary>
             <ul class="publist">
@@ -298,7 +293,6 @@
             </ul>
           </details>
 
-          <!-- === 2021 示例 === -->
           <details>
             <summary>2021 &nbsp; <span class="muted">(2)</span></summary>
             <ul class="publist">
@@ -317,7 +311,6 @@
             </ul>
           </details>
 
-          <!-- === 2020 示例 === -->
           <details>
             <summary>2020 &nbsp; <span class="muted">(2)</span></summary>
             <ul class="publist">
@@ -335,12 +328,9 @@
               </li>
             </ul>
           </details>
-
-          <!-- TODO[新增年份]：复制上方 <details> 块，改 summary 年份与 (数量)，把条目粘进去 -->
         </section>
 
-        <!-- ===== Talks =====
-             TODO[报告]：把你的口头/墙报按年份或会议分类；可加 slides/abstract 链接 -->
+        <!-- Talks -->
         <section id="talks">
           <h2>Talks</h2>
           <ul style="padding-left:18px; margin:8px 0">
@@ -349,15 +339,13 @@
           </ul>
         </section>
 
-        <!-- ===== CV =====
-             TODO[CV]：把简历 PDF 放到 /files/HuanSong_CV.pdf 或改成你的文件名 -->
+        <!-- CV -->
         <section id="cv">
           <h2>Curriculum Vitae</h2>
           <p>Download: <a class="chip" href="/files/HuanSong_CV.pdf" target="_blank" rel="noreferrer">CV (PDF)</a></p>
         </section>
 
-        <!-- ===== Contact =====
-             TODO[链接]：替换成你的学术主页/ORCID/GitHub 等链接 -->
+        <!-- Contact -->
         <section id="contact">
           <h2>Contact</h2>
           <p>Email: <a href="mailto:songhuan@pku.edu.cn">songhuan@pku.edu.cn</a></p>
@@ -378,7 +366,7 @@
   </div>
 
   <script>
-    // 导航高亮（点击后随滚动高亮对应菜单）
+    // 导航高亮（随滚动切换 active）
     const links=[...document.querySelectorAll('nav a')];
     const targets=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
     const io=new IntersectionObserver(es=>{
@@ -391,7 +379,7 @@
     },{rootMargin:"-40% 0px -55% 0px", threshold:0});
     targets.forEach(t=>io.observe(t));
 
-    // 年份与更新时间（自动）
+    // 年份与更新时间
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('lastUpdate').textContent = new Date().toISOString().slice(0,10);
   </script>
