@@ -1,0 +1,9 @@
+Place the optional website photos in this folder using these exact names:
+
+hero.jpg
+profile.jpg
+research-ho2.jpg
+research-ro2.jpg
+research-ros.jpg
+
+See ../PHOTO_PLACEMENT_CN.md for the recommended content and dimensions.
